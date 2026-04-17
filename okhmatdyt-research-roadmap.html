@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Research Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  .reframe {
+    background: #FAEEDA;
+    border: 1px solid #EF9F27;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 24px;
+    font-size: 12px;
+    color: #633806;
+    line-height: 1.6;
+  }
+
+  .reframe-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #854F0B;
+    margin-bottom: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .phase {
+    margin-bottom: 12px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .phase-header {
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .phase-num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .phase-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .phase-meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .phase-body {
+    padding: 16px 18px;
+    background: var(--surface);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    border-top: 1px solid var(--border2);
+  }
+
+  .col-title {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .item {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+
+  .item:last-child { margin-bottom: 0; }
+
+  .d {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .artifact {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin: 2px 2px 0 0;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .insight-box {
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: var(--text-mid);
+    font-style: italic;
+    border-left: 3px solid;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  .arrow {
+    text-align: center;
+    font-size: 20px;
+    color: var(--text-muted);
+    margin: 4px 0;
+    line-height: 1;
+  }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 20px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 760px) {
+    .phase-body { grid-template-columns: 1fr; }
+    .phase-header { grid-template-columns: 36px 1fr; }
+    .phase-meta { display: none; }
+    body { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Research Roadmap</div>
+
+<div class="reframe">
+  <div class="reframe-label">⚡ Project reframe</div>
+  Initial brief: "Help doctors be more welcoming." Reframed after kick-off: the problem was structural, not behavioural. The entire service model needed redesigning for a competitive, patient-centric market.
+</div>
+
+<!-- PHASE 1 -->
+<div class="phase">
+  <div class="phase-header" style="background:#E6F1FB;">
+    <div class="phase-num" style="background:#185FA5;color:#fff;">1</div>
+    <div class="phase-title">Understanding the system — Business Model Workshops</div>
+    <div class="phase-meta">3 workshops · Stakeholder alignment</div>
+  </div>
+  <div class="phase-body">
+    <div>
+      <div class="col-title">What & How</div>
+      <div class="item"><div class="d" style="background:#378ADD"></div>3 co-creation workshops with hospital leadership + NHIF</div>
+      <div class="item"><div class="d" style="background:#378ADD"></div>Business Model Canvas: AS IS → TO BE</div>
+      <div class="item"><div class="d" style="background:#378ADD"></div>Stakeholder alignment on constraints and opportunities</div>
+    </div>
+    <div>
+      <div class="col-title">Why this method</div>
+      <div class="item"><div class="d" style="background:#378ADD"></div>Before designing, needed shared understanding of the whole system</div>
+      <div class="item"><div class="d" style="background:#378ADD"></div>Multiple stakeholders with conflicting priorities — needed alignment first</div>
+      <div class="item"><div class="d" style="background:#378ADD"></div>Canvas forced explicit conversation about what was fixed vs changeable</div>
+    </div>
+    <div>
+      <div class="col-title">Output & Key insight</div>
+      <div style="margin-bottom:8px;">
+        <span class="artifact" style="background:#E6F1FB;color:#185FA5;">BMC AS IS</span>
+        <span class="artifact" style="background:#E6F1FB;color:#185FA5;">BMC TO BE</span>
+        <span class="artifact" style="background:#E6F1FB;color:#185FA5;">Revenue stream map</span>
+      </div>
+      <div class="insight-box" style="border-color:#378ADD;">Okhmatdyt cannot be a commercial business — only a social business. Revenue is a means to better care, not a goal.</div>
+    </div>
+  </div>
+</div>
+
+<div class="arrow">↓</div>
+
+<!-- PHASE 2 -->
+<div class="phase">
+  <div class="phase-header" style="background:#EAF3DE;">
+    <div class="phase-num" style="background:#3B6D11;color:#fff;">2</div>
+    <div class="phase-title">Market exploration — Service Safari</div>
+    <div class="phase-meta">Competitive research · Private clinics</div>
+  </div>
+  <div class="phase-body">
+    <div>
+      <div class="col-title">What & How</div>
+      <div class="item"><div class="d" style="background:#639922"></div>Visited private children's clinics as a regular customer</div>
+      <div class="item"><div class="d" style="background:#639922"></div>Observed: services, pricing, payment flow, patient experience</div>
+      <div class="item"><div class="d" style="background:#639922"></div>Benchmarked against Sinevo lab offering</div>
+    </div>
+    <div>
+      <div class="col-title">Why this method</div>
+      <div class="item"><div class="d" style="background:#639922"></div>Before asking patients what they'd pay for — needed to see what already worked in the market</div>
+      <div class="item"><div class="d" style="background:#639922"></div>Surveys would give aspirations; safari gave reality</div>
+      <div class="item"><div class="d" style="background:#639922"></div>Legislation said what was legal; safari showed what was viable</div>
+    </div>
+    <div>
+      <div class="col-title">Output & Key insight</div>
+      <div style="margin-bottom:8px;">
+        <span class="artifact" style="background:#EAF3DE;color:#3B6D11;">Paid services shortlist</span>
+        <span class="artifact" style="background:#EAF3DE;color:#3B6D11;">Competitive synthesis</span>
+      </div>
+      <div class="insight-box" style="border-color:#639922;">Clear shortlist: after-hours consultations, lab tests, equipment diagnostics bundled with specialist consultation.</div>
+    </div>
+  </div>
+</div>
+
+<div class="arrow">↓</div>
+
+<!-- PHASE 3 -->
+<div class="phase">
+  <div class="phase-header" style="background:#FAEEDA;">
+    <div class="phase-num" style="background:#854F0B;color:#fff;">3</div>
+    <div class="phase-title">Measuring current quality — eNPS Survey</div>
+    <div class="phase-meta">Quantitative baseline · n=42</div>
+  </div>
+  <div class="phase-body">
+    <div>
+      <div class="col-title">What & How</div>
+      <div class="item"><div class="d" style="background:#EF9F27"></div>Structured satisfaction survey at point of care</div>
+      <div class="item"><div class="d" style="background:#EF9F27"></div>Measured: overall satisfaction, touchpoints, NPS</div>
+      <div class="item"><div class="d" style="background:#EF9F27"></div>Dual NPS: separate score for hospital AND for individual doctor</div>
+    </div>
+    <div>
+      <div class="col-title">Why this method</div>
+      <div class="item"><div class="d" style="background:#EF9F27"></div>Needed quantitative baseline before any design work</div>
+      <div class="item"><div class="d" style="background:#EF9F27"></div>Dual NPS deliberately separated medical quality from service quality</div>
+      <div class="item"><div class="d" style="background:#EF9F27"></div>Gave data to justify recommendations to leadership</div>
+    </div>
+    <div>
+      <div class="col-title">Output & Key insight</div>
+      <div style="margin-bottom:8px;">
+        <span class="artifact" style="background:#FAEEDA;color:#854F0B;">eNPS baseline report</span>
+        <span class="artifact" style="background:#FAEEDA;color:#854F0B;">Satisfaction analysis</span>
+      </div>
+      <div class="insight-box" style="border-color:#EF9F27;">Overall NPS: +21 · CSI: 63% · Doctor NPS: +61 · Service NPS: −14. Gap of 75 points. Medical quality ≠ service quality — completely different interventions needed.</div>
+    </div>
+  </div>
+</div>
+
+<div class="arrow">↓</div>
+
+<!-- PHASE 4 -->
+<div class="phase">
+  <div class="phase-header" style="background:#F5F0FA;">
+    <div class="phase-num" style="background:#533489;color:#fff;">4</div>
+    <div class="phase-title">Understanding the patient journey — Semi-structured Interviews</div>
+    <div class="phase-meta">Qualitative · n=30 · Self-referrals only</div>
+  </div>
+  <div class="phase-body">
+    <div>
+      <div class="col-title">What & How</div>
+      <div class="item"><div class="d" style="background:#7C3AED"></div>30 in-depth interviews with self-referring parents</div>
+      <div class="item"><div class="d" style="background:#7C3AED"></div>Focused on: decision to come, experience, comparison with private clinics</div>
+      <div class="item"><div class="d" style="background:#7C3AED"></div>Deliberate scoping: self-referrals only (not emergency, not GP-referred)</div>
+    </div>
+    <div>
+      <div class="col-title">Why this method</div>
+      <div class="item"><div class="d" style="background:#7C3AED"></div>Self-referrals = only segment that actively chooses Okhmatdyt</div>
+      <div class="item"><div class="d" style="background:#7C3AED"></div>Only segment where hospital can compete, differentiate and charge</div>
+      <div class="item"><div class="d" style="background:#7C3AED"></div>Survey gave numbers; interviews gave the why behind them</div>
+    </div>
+    <div>
+      <div class="col-title">Output & Key insight</div>
+      <div style="margin-bottom:8px;">
+        <span class="artifact" style="background:#F5F0FA;color:#533489;">Persona (Segment 2)</span>
+        <span class="artifact" style="background:#F5F0FA;color:#533489;">1× Customer Journey Map (outpatient self-referral)</span>
+        <span class="artifact" style="background:#F5F0FA;color:#533489;">Value Proposition Canvas</span>
+      </div>
+      <div class="insight-box" style="border-color:#7C3AED;">Reception is the most damaging touchpoint — encountered 3 times. Booking gives zero advantage. Informal payments create unfair queues.</div>
+    </div>
+  </div>
+</div>
+
+<div class="arrow">↓</div>
+
+<!-- PHASE 5 -->
+<div class="phase">
+  <div class="phase-header" style="background:#E1F5EE;">
+    <div class="phase-num" style="background:#0F6E56;color:#fff;">5</div>
+    <div class="phase-title">Going deeper — Contextual Interviews + Observation</div>
+    <div class="phase-meta">n=10 doctors · 1 week field observation</div>
+  </div>
+  <div class="phase-body">
+    <div>
+      <div class="col-title">What & How</div>
+      <div class="item"><div class="d" style="background:#0F6E56"></div>10 contextual interviews with doctors across departments</div>
+      <div class="item"><div class="d" style="background:#0F6E56"></div>1 week on-site: 1 full day per department</div>
+      <div class="item"><div class="d" style="background:#0F6E56"></div>Watched: how records completed, how Dr. Eleks used (or not)</div>
+    </div>
+    <div>
+      <div class="col-title">Why this method</div>
+      <div class="item"><div class="d" style="background:#0F6E56"></div>Digitisation introduced but adoption inconsistent</div>
+      <div class="item"><div class="d" style="background:#0F6E56"></div>Needed to understand actual workflow, not intended one</div>
+      <div class="item"><div class="d" style="background:#0F6E56"></div>Couldn't design training without seeing real friction points first</div>
+    </div>
+    <div>
+      <div class="col-title">Output & Key insight</div>
+      <div style="margin-bottom:8px;">
+        <span class="artifact" style="background:#E1F5EE;color:#085041;">Workflow analysis</span>
+        <span class="artifact" style="background:#E1F5EE;color:#085041;">Training programme design</span>
+      </div>
+      <div class="insight-box" style="border-color:#0F6E56;">Patient data entered manually 3+ times across separate paper systems. No automatic data flow. Training had to target specific friction, not generic onboarding.</div>
+    </div>
+  </div>
+</div>
+
+<div class="arrow">↓</div>
+
+<!-- PHASE 6 -->
+<div class="phase">
+  <div class="phase-header" style="background:#FCEBEB;">
+    <div class="phase-num" style="background:#A32D2D;color:#fff;">6</div>
+    <div class="phase-title">Synthesis — Service Blueprint + Recommendations</div>
+    <div class="phase-meta">All streams combined · Prioritised output</div>
+  </div>
+  <div class="phase-body">
+    <div>
+      <div class="col-title">What & How</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>All research streams synthesised into service blueprint</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>AS IS mapped: customer, frontstage, backstage, support systems</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>TO BE interventions mapped per stage</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>Recommendations prioritised by impact vs effort</div>
+    </div>
+    <div>
+      <div class="col-title">Why this method</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>Blueprint made the invisible visible — staff saw the gap they were creating</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>Connects patient experience to backend operations in one view</div>
+      <div class="item"><div class="d" style="background:#E24B4A"></div>Gives leadership an actionable, prioritised plan — not just a list of problems</div>
+    </div>
+    <div>
+      <div class="col-title">Output & Outcomes</div>
+      <div style="margin-bottom:8px;">
+        <span class="artifact" style="background:#FCEBEB;color:#A32D2D;">Service Blueprint AS IS + TO BE</span>
+        <span class="artifact" style="background:#FCEBEB;color:#A32D2D;">Recommendations + priorities</span>
+      </div>
+      <div class="insight-box" style="border-color:#E24B4A;background:#FCEBEB;">✓ Paid services launched &nbsp;·&nbsp; ✓ Dr. Eleks operational &nbsp;·&nbsp; ✓ Bonus system designed</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

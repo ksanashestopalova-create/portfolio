@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Discussion Guide: Parent Interviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .meta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .intro-box {
+    background: #E6F1FB;
+    border: 1px solid #B5D4F4;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 12px;
+    color: #0C447C;
+    line-height: 1.65;
+  }
+
+  .intro-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #185FA5;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    color: #fff;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .section-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .section-goal {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 14px;
+    padding-left: 40px;
+  }
+
+  .question-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .question-block:last-child { margin-bottom: 0; }
+
+  .main-q {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .probes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border2);
+    padding-top: 8px;
+  }
+
+  .probes li {
+    display: flex;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-mid);
+    padding: 3px 0;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+
+  .probe-dot {
+    color: var(--text-muted);
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  .probe-label {
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--bg);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .note-box {
+    background: #FAEEDA;
+    border: 1px solid #EF9F27;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: #633806;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  .closing-box {
+    background: #EAF3DE;
+    border: 1px solid #C0DD97;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: #27500A;
+    line-height: 1.65;
+  }
+
+  .closing-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #3B6D11;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 24px; }
+    .meta-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Parent / Patient Interviews</div>
+
+<div class="meta-row">
+  <div class="meta-card">
+    <div class="meta-label">Participants</div>
+    <div class="meta-value">Parents of children, self-referrals only</div>
+  </div>
+  <div class="meta-card">
+    <div class="meta-label">Duration</div>
+    <div class="meta-value">45–60 minutes</div>
+  </div>
+  <div class="meta-card">
+    <div class="meta-label">Format</div>
+    <div class="meta-value">Semi-structured, in-person or remote</div>
+  </div>
+</div>
+
+<div class="intro-box">
+  <div class="intro-label">Interviewer script — opening</div>
+  Thank you for taking the time to speak with me today. My name is Oksana, and I'm a researcher working with Okhmatdyt Children's Hospital. We're trying to understand the experience of families who visit the hospital — what works well, what's difficult, and how we can improve. There are no right or wrong answers. I'm interested in your honest experience, including anything that frustrated you. The conversation will take about 45–60 minutes. With your permission, I'd like to take notes. Everything you share is confidential and will only be used in aggregate form to inform improvements. Do you have any questions before we begin?
+</div>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#185FA5;">1</div>
+    <div class="section-title">Warm-up — Getting to know the participant</div>
+    <div class="section-time">~5 min</div>
+  </div>
+  <div class="section-goal">Goal: build rapport, understand context, no pressure</div>
+
+  <div class="question-block">
+    <div class="main-q">Can you tell me a little about your family — how old is your child, and how long have you been coming to Okhmatdyt?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Is this your first visit or have you been here before?</li>
+      <li><span class="probe-label">probe</span>Do you live in Lviv or did you travel to come here?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#533489;">2</div>
+    <div class="section-title">Decision to come — Awareness & choice</div>
+    <div class="section-time">~10 min</div>
+  </div>
+  <div class="section-goal">Goal: understand what triggered the visit and why Okhmatdyt specifically</div>
+
+  <div class="question-block">
+    <div class="main-q">Can you walk me through what happened that led you to come to Okhmatdyt this time? What was going on with your child?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Was this an urgent situation or something you planned in advance?</li>
+      <li><span class="probe-label">probe</span>Did your family doctor recommend you come here, or did you decide yourself?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">Why did you choose Okhmatdyt specifically? What made you decide to come here rather than somewhere else?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Had someone recommended it to you?</li>
+      <li><span class="probe-label">probe</span>Did you look at other options — private clinics, other hospitals?</li>
+      <li><span class="probe-label">probe</span>What did you know about Okhmatdyt before you came?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">How did you find the information you needed — the address, the phone number, which doctor to see?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Did you look at the website? Was it helpful?</li>
+      <li><span class="probe-label">probe</span>Did you ask friends or family? Online groups?</li>
+      <li><span class="probe-label">probe</span>Was it easy or difficult to find out what you needed?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#854F0B;">3</div>
+    <div class="section-title">Booking & arrival — First contact with the hospital</div>
+    <div class="section-time">~10 min</div>
+  </div>
+  <div class="section-goal">Goal: understand the booking process and first impressions — key friction area</div>
+
+  <div class="question-block">
+    <div class="main-q">Can you walk me through how you booked your appointment? What did you do, step by step?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Did you call the reception? What was that like?</li>
+      <li><span class="probe-label">probe</span>Were you able to get an appointment at a time that worked for you?</li>
+      <li><span class="probe-label">probe</span>Did anything surprise or frustrate you during that process?</li>
+    </ul>
+    <div class="note-box">⚠ Listen for: tone of the receptionist, clarity of information, whether they felt the booking was confirmed or uncertain.</div>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">When you arrived at the hospital, what happened first? Can you describe that experience?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Was it easy to find the reception or the right department?</li>
+      <li><span class="probe-label">probe</span>Did you need to queue or wait at reception? How long?</li>
+      <li><span class="probe-label">probe</span>How did the staff at reception interact with you?</li>
+      <li><span class="probe-label">probe</span>Were you asked to provide information you'd already given when booking?</li>
+    </ul>
+    <div class="note-box">⚠ Key area: double data entry, rude reception, token/queue confusion. Let them tell it — don't lead.</div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#A32D2D;">4</div>
+    <div class="section-title">Waiting — The hardest part</div>
+    <div class="section-time">~8 min</div>
+  </div>
+  <div class="section-goal">Goal: understand waiting experience, fairness perception, environment</div>
+
+  <div class="question-block">
+    <div class="main-q">After you checked in, how long did you wait before seeing the doctor? Can you describe what that wait was like?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Where did you wait — was there a designated area?</li>
+      <li><span class="probe-label">probe</span>How was your child during the wait? Was there anything to keep them occupied?</li>
+      <li><span class="probe-label">probe</span>Did the wait feel fair — did you understand why it was taking long?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">Did you notice other people being seen before you even though they arrived later? What did you think about that?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Did you understand why that happened?</li>
+      <li><span class="probe-label">probe</span>How did that make you feel?</li>
+    </ul>
+    <div class="note-box">⚠ This surfaces the informal payment / queue-jumping issue without leading the participant directly to it.</div>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#0F6E56;">5</div>
+    <div class="section-title">The appointment — Doctor experience</div>
+    <div class="section-time">~10 min</div>
+  </div>
+  <div class="section-goal">Goal: understand what worked well — doctor quality is the key strength</div>
+
+  <div class="question-block">
+    <div class="main-q">Can you tell me about your experience with the doctor? What was the appointment like?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Did the doctor explain the diagnosis clearly? Did you understand what was wrong?</li>
+      <li><span class="probe-label">probe</span>How did the doctor interact with your child?</li>
+      <li><span class="probe-label">probe</span>Did you feel listened to and taken seriously?</li>
+      <li><span class="probe-label">probe</span>Were you given clear instructions about treatment and next steps?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">Was there anything about the appointment itself that was confusing or unclear?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>The medical card — did anything happen with it that you found difficult?</li>
+      <li><span class="probe-label">probe</span>Were prescriptions or referrals easy to understand?</li>
+      <li><span class="probe-label">probe</span>Did anyone ask you to pay, or was it unclear whether payment was expected?</li>
+    </ul>
+    <div class="note-box">⚠ Payment ambiguity is a key insight. Approach gently — people may feel embarrassed about the informal payment system.</div>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#3B6D11;">6</div>
+    <div class="section-title">After the visit — Follow-up and overall impression</div>
+    <div class="section-time">~8 min</div>
+  </div>
+  <div class="section-goal">Goal: understand what happens after, satisfaction, loyalty, comparison with private</div>
+
+  <div class="question-block">
+    <div class="main-q">Did you need to come back for a follow-up? How did you arrange that?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Was it easy to book the follow-up, or did you run into the same difficulties as before?</li>
+      <li><span class="probe-label">probe</span>Were you given a specific time, or was it uncertain?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">Have you also used private children's clinics? If so, how would you compare the experience?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>What does a private clinic do better, in your experience?</li>
+      <li><span class="probe-label">probe</span>Is there anything Okhmatdyt offers that private clinics don't or can't?</li>
+      <li><span class="probe-label">probe</span>If Okhmatdyt offered paid services with clear pricing, would you consider using them? What would make that feel worthwhile?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">Would you come back to Okhmatdyt? Would you recommend it to other parents?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>What would you say to a friend who was deciding whether to come here?</li>
+      <li><span class="probe-label">probe</span>Is there one thing that, if it changed, would make the experience significantly better?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing-box">
+  <div class="closing-label">Closing script</div>
+  Thank you so much — this has been really valuable. Before we finish, is there anything else about your experience that you'd like to share that we haven't covered? Anything that stood out — positively or negatively? [pause] We really appreciate your honesty. Your feedback will directly inform how we improve things for families coming here in the future.
+</div>
+
+</body>
+</html>

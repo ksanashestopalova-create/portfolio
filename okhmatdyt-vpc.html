@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Value Proposition Canvas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --surface2: #f2ede6;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+    --blue-bg: #E6F1FB; --blue-text: #0C447C; --blue-dot: #378ADD;
+    --green-bg: #EAF3DE; --green-text: #27500A; --green-dot: #639922;
+    --red-dot: #E24B4A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .vpc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .side {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .side-header {
+    padding: 12px 16px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .map-header { background: var(--blue-bg); color: var(--blue-text); }
+  .profile-header { background: var(--green-bg); color: var(--green-text); }
+
+  .side-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--surface);
+  }
+
+  .block-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .bdot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .list-item {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-mid);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border2);
+    line-height: 1.5;
+    align-items: flex-start;
+  }
+
+  .list-item:last-child { border-bottom: none; }
+
+  .item-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .list-item strong { color: var(--text); font-weight: 500; }
+
+  .fit-box {
+    grid-column: span 2;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 4px;
+  }
+
+  .fit-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .fit-statement {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.65;
+    font-style: italic;
+    border-left: 3px solid var(--blue-dot);
+    padding-left: 16px;
+    margin-bottom: 12px;
+  }
+
+  .fit-statement:last-child { margin-bottom: 0; }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 20px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 760px) {
+    .vpc { grid-template-columns: 1fr; }
+    .fit-box { grid-column: span 1; }
+    body { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Value Proposition Canvas</div>
+
+<div class="vpc">
+
+  <!-- LEFT: VALUE MAP -->
+  <div class="side">
+    <div class="side-header map-header">Value Map — What Okhmatdyt Offers</div>
+    <div class="side-body">
+
+      <div>
+        <div class="block-title"><div class="bdot" style="background:#378ADD"></div>Products & Services</div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span><strong>Paid consultations after 14:00</strong> — specialist appointments outside standard clinic hours, same premises</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span><strong>Laboratory diagnostics</strong> — blood tests and full lab panel (benchmarked against Sinevo offering)</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span><strong>Equipment-based diagnostics</strong> — MRI, EEG and others, bundled with specialist consultation for interpretation</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span><strong>Medical consilium</strong> — multi-specialist consultation for complex or unclear cases</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span><strong>Sports & rehabilitation packages</strong> — massage and physiotherapy for active children and young athletes</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span><strong>Preventive check-up packages</strong> — vision screening, developmental assessment, neurodevelopmental & psychological evaluation</span></div>
+      </div>
+
+      <div>
+        <div class="block-title"><div class="bdot" style="background:#E24B4A"></div>Pain Relievers</div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span><strong>Transparent pricing</strong> — published price list, clear payment process before arrival</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span><strong>Reliable appointment times</strong> — paid slots with guaranteed time, reducing wait to minutes not hours</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span><strong>Service standards for staff</strong> — communication training and incentive system for front-desk and junior staff</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span><strong>Digital records</strong> — Dr. Eleks system eliminates paper card problem</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span><strong>Clear navigation</strong> — wayfinding signage, floor maps, marked reception</span></div>
+      </div>
+
+      <div>
+        <div class="block-title"><div class="bdot" style="background:#639922"></div>Gain Creators</div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Access to <strong>rare specialist expertise</strong> unavailable at private clinics — at a competitive price</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span><strong>Same-day add-on diagnostics</strong> — no need for a second visit</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Niche packages not available elsewhere — <strong>neurodevelopmental screening, sports physio</strong></span></div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Trusted brand — <strong>decades of clinical reputation</strong> in the region</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT: CUSTOMER PROFILE -->
+  <div class="side">
+    <div class="side-header profile-header">Customer Profile — Olena (Segment 2)</div>
+    <div class="side-body">
+
+      <div>
+        <div class="block-title"><div class="bdot" style="background:#639922"></div>Customer Jobs</div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Get her child diagnosed and treated quickly without disrupting her workday</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Make a confident, informed decision about her child's health</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Access specialist expertise she can't find at a private clinic</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#639922"></div><span>Feel in control of the process and the cost</span></div>
+      </div>
+
+      <div>
+        <div class="block-title"><div class="bdot" style="background:#E24B4A"></div>Pains</div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span>Waits 1–3 hours despite having a scheduled appointment</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span>Never knows if she needs to pay, how much, or to whom</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span>Dismissed or spoken to rudely by reception and admin staff</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span>Holds a sick child in an adult waiting corridor with no play area</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span>Can't find the registration desk — loses time navigating a confusing building</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#E24B4A"></div><span>Must carry paper medical cards back and forth — risk of loss</span></div>
+      </div>
+
+      <div>
+        <div class="block-title"><div class="bdot" style="background:#378ADD"></div>Gains</div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span>Leaves knowing exactly what is wrong and what to do next</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span>Child was comfortable and not frightened during the visit</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span>Gets rare specialist access she couldn't find privately</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span>Visit fits into her working day — no half-day written off</span></div>
+        <div class="list-item"><div class="item-dot" style="background:#378ADD"></div><span>Trusts the institution enough to recommend it to other parents</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FIT STATEMENT -->
+  <div class="fit-box">
+    <div class="fit-title">The Fit — Value Proposition Statement</div>
+    <div class="fit-statement">
+      For working parents who choose where their child is treated, Okhmatdyt offers the clinical depth of a specialist hospital with the predictability and service standards of a private clinic — at a transparent, fair price.
+    </div>
+    <div class="fit-statement">
+      Unlike private clinics, Okhmatdyt provides access to rare specialists, complex diagnostics, and niche services (neurodevelopmental screening, sports rehabilitation) that cannot be found elsewhere in the region — now delivered through a trustworthy, organised service experience.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

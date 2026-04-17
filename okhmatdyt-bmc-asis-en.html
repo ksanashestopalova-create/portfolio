@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Business Model Canvas AS IS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --border: #d8d2c8;
+    --border2: #c0b8ac;
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+    --warn-bg: #FAEEDA;
+    --warn-text: #854F0B;
+    --gap-bg: #FCEBEB;
+    --gap-text: #A32D2D;
+    --ok-bg: #EAF3DE;
+    --ok-text: #3B6D11;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .bmc {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    min-height: 200px;
+  }
+
+  .cell-wide { grid-column: span 2; }
+
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+    grid-column: span 5;
+  }
+
+  .cell-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cell p {
+    margin-bottom: 8px;
+    color: var(--text-mid);
+  }
+
+  .cell p:last-child { margin-bottom: 0; }
+
+  .cell strong { color: var(--text); font-weight: 500; }
+
+  .flag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .flag-warn { background: var(--warn-bg); color: var(--warn-text); }
+  .flag-gap { background: var(--gap-bg); color: var(--gap-text); }
+  .flag-ok { background: var(--ok-bg); color: var(--ok-text); }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media print {
+    body { padding: 20px; }
+    .bmc { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Business Model Canvas — AS IS</div>
+
+<div class="bmc">
+
+  <!-- Row 1 -->
+  <div class="cell">
+    <div class="cell-title">Key Partners</div>
+    <p><strong>Charitable foundations</strong> — provide funding and medical supplies. Irregular and one-off contributions.</p>
+    <p><strong>University & academic department</strong> — partnership exists formally but functions primarily as an oversight body rather than a collaborative one.</p>
+    <p><span class="flag flag-gap">Gap</span><br><strong>Media partnerships</strong> — absent; identified as a strategic need.</p>
+    <p style="font-size:11px;color:var(--text-muted)">Competitors: Regional Hospital on Orly St., Dnister Hospital.</p>
+  </div>
+
+  <div class="cell cell-wide">
+    <div class="cell-title">Key Activities</div>
+    <p>Outpatient consultations and diagnostics</p>
+    <p>Ambulatory (day) treatment</p>
+    <p>Inpatient treatment</p>
+  </div>
+
+  <div class="cell cell-wide">
+    <div class="cell-title">Value Proposition</div>
+    <p><span class="flag flag-ok">Strength</span><br>Comprehensive multi-specialty care — no patient is turned away.</p>
+    <p>High clinical expertise, including complex and rare cases.</p>
+    <p>Child-centred ethos: staff treat patients as part of an extended family.</p>
+    <p><span class="flag flag-warn">Informal only</span><br>Empathy and care are delivered at an individual level but not embedded in organisational processes or service standards.</p>
+  </div>
+
+  <!-- Row 2 -->
+  <div class="cell">
+    <div class="cell-title">Key Resources</div>
+    <p><strong>People</strong> — specialist physicians, junior medical staff, administrative and support staff.</p>
+    <p><strong>Physical infrastructure</strong> — medical equipment, facilities, vehicles.</p>
+    <p><span class="flag flag-warn">Constraint</span><br><strong>Budget</strong> — fully controlled by external authorities. No internal financial autonomy. Communication with the finance function is fragmented.</p>
+  </div>
+
+  <div class="cell cell-wide">
+    <div class="cell-title">Channels</div>
+    <p><strong>Facebook page, website</strong> — present but underutilised.</p>
+    <p><strong>Regional outreach visits</strong> — legally mandated mobile consultation brigades sent to rural areas.</p>
+    <p><span class="flag flag-warn">Ineffective</span><br>Outreach visits function as social events rather than clinical or promotional activity.</p>
+    <p><strong>TV and radio</strong> — used occasionally; staff participation is low due to reluctance to appear publicly.</p>
+  </div>
+
+  <div class="cell">
+    <div class="cell-title">Customer Relationships</div>
+    <p><span class="flag flag-gap">Critical gap</span><br>Relationships are strained. Legacy institutional culture produces dismissive and at times hostile communication from administrative and junior staff.</p>
+    <p>No structured service standards or patient communication protocols in place.</p>
+  </div>
+
+  <div class="cell">
+    <div class="cell-title">Customer Segments</div>
+    <p><strong>Current segment</strong><br>Ukrainian families with children aged 0–18, middle-income.</p>
+    <p><strong>Target segment</strong><br>Families with above-average income — willing to pay for higher service standards.</p>
+    <p><span class="flag flag-gap">Gap</span><br>No active patient acquisition strategy. Retention efforts are minimal and informal.</p>
+  </div>
+
+  <!-- Bottom row -->
+  <div class="bottom-row">
+    <div class="cell">
+      <div class="cell-title">Cost Structure</div>
+      <p><strong>Facilities & utilities</strong> — covered by the Regional Government Authority.</p>
+      <p><strong>Staff salaries</strong> — funded from the state budget at a fixed rate. Under healthcare reform, shifting to activity-based reimbursement tied to services delivered (NHIF contracts).</p>
+    </div>
+    <div class="cell">
+      <div class="cell-title">Revenue Streams</div>
+      <p><span class="flag flag-warn">Single source</span><br><strong>State budget funding</strong> — primary income; not tied to performance or patient volume.</p>
+      <p><strong>Charitable donations & foundation grants</strong> — supplementary and unpredictable.</p>
+      <p><span class="flag flag-gap">Missing</span><br>No paid services. No insurance partnerships. No commercial revenue of any kind.</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

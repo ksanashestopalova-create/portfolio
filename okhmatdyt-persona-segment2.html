@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Persona: The Self-Referring Parent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --surface2: #f2ede6;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+    --blue-bg: #E6F1FB; --blue-text: #185FA5;
+    --amber-bg: #FAEEDA; --amber-text: #854F0B;
+    --red-bg: #FCEBEB; --red-text: #A32D2D;
+    --green-bg: #EAF3DE; --green-text: #3B6D11;
+    --blue-dot: #378ADD;
+    --red-dot: #E24B4A;
+    --amber-dot: #EF9F27;
+    --green-dot: #639922;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 16px;
+  }
+
+  .left-col { display: flex; flex-direction: column; gap: 12px; }
+  .right-col { display: flex; flex-direction: column; gap: 12px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+  }
+
+  .card-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border2);
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--blue-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .persona-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+
+  .persona-role {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  .attr-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 12px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border2);
+    gap: 8px;
+  }
+
+  .attr-row:last-child { border-bottom: none; }
+  .attr-label { color: var(--text-muted); flex-shrink: 0; }
+  .attr-val { color: var(--text); font-weight: 500; text-align: right; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+
+  .tag {
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 3px 8px;
+    border-radius: 5px;
+  }
+
+  .tag-blue { background: var(--blue-bg); color: var(--blue-text); }
+  .tag-amber { background: var(--amber-bg); color: var(--amber-text); }
+  .tag-green { background: var(--green-bg); color: var(--green-text); }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .list-item {
+    display: flex;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-mid);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border2);
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+
+  .list-item:last-child { border-bottom: none; }
+
+  .list-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .dot-blue { background: var(--blue-dot); }
+  .dot-red { background: var(--red-dot); }
+  .dot-amber { background: var(--amber-dot); }
+  .dot-green { background: var(--green-dot); }
+
+  .quote-box {
+    background: var(--surface2);
+    border-left: 3px solid var(--blue-dot);
+    border-radius: 0 8px 8px 0;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--text-mid);
+  }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 20px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 760px) {
+    .persona-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    body { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Persona — Segment 2: The Self-Referring Parent</div>
+
+<div class="persona-grid">
+
+  <div class="left-col">
+
+    <div class="card">
+      <div class="avatar">👩</div>
+      <div class="persona-name">Olena</div>
+      <div class="persona-role">The Self-Referring Parent</div>
+      <div class="attr-row"><span class="attr-label">Age</span><span class="attr-val">32–42</span></div>
+      <div class="attr-row"><span class="attr-label">Income</span><span class="attr-val">Middle to above-average</span></div>
+      <div class="attr-row"><span class="attr-label">Employment</span><span class="attr-val">Working professional</span></div>
+      <div class="attr-row"><span class="attr-label">Children</span><span class="attr-val">1–2, aged 0–12</span></div>
+      <div class="attr-row"><span class="attr-label">Location</span><span class="attr-val">Lviv city or nearby region</span></div>
+      <div class="attr-row"><span class="attr-label">Private clinic exp.</span><span class="attr-val">Yes — uses both</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Why she chooses Okhmatdyt</div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Trusts specific doctors by name or reputation</span></div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Wants a second opinion on a diagnosis from a private clinic</span></div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Needs a rare specialist not available privately</span></div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Has used Okhmatdyt before and experienced a good outcome</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Behaviour patterns</div>
+      <div class="tag-row">
+        <span class="tag tag-blue">Researches online first</span>
+        <span class="tag tag-blue">Asks in parent groups</span>
+        <span class="tag tag-blue">Compares clinics</span>
+        <span class="tag tag-amber">Uses private + public</span>
+        <span class="tag tag-amber">Time-pressured</span>
+        <span class="tag tag-green">Loyal to good doctors</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="right-col">
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">Goals</div>
+        <div class="list-item"><div class="list-dot dot-blue"></div><span>Fast, accurate diagnosis and treatment for her child</span></div>
+        <div class="list-item"><div class="list-dot dot-blue"></div><span>Appointment at a specific time — not a half-day wait</span></div>
+        <div class="list-item"><div class="list-dot dot-blue"></div><span>Clear explanation of diagnosis and next steps</span></div>
+        <div class="list-item"><div class="list-dot dot-blue"></div><span>Respectful, child-friendly experience</span></div>
+        <div class="list-item"><div class="list-dot dot-blue"></div><span>Transparent cost — know before she arrives</span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Fears</div>
+        <div class="list-item"><div class="list-dot dot-red"></div><span>Treatment won't work or will make things worse</span></div>
+        <div class="list-item"><div class="list-dot dot-red"></div><span>Incompetent or dismissive staff</span></div>
+        <div class="list-item"><div class="list-dot dot-red"></div><span>Losing half a workday to queues</span></div>
+        <div class="list-item"><div class="list-dot dot-red"></div><span>Unclear whether to pay, how much, to whom</span></div>
+        <div class="list-item"><div class="list-dot dot-red"></div><span>Child getting infected in the waiting area</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Pain points experienced at Okhmatdyt</div>
+      <div class="list-item"><div class="list-dot dot-red"></div><span><strong>Waiting times</strong> — arrives with a timed appointment, waits 1–3 hours anyway</span></div>
+      <div class="list-item"><div class="list-dot dot-red"></div><span><strong>Payment ambiguity</strong> — no price list, unclear if informal payment is expected</span></div>
+      <div class="list-item"><div class="list-dot dot-red"></div><span><strong>Rude reception staff</strong> — first touchpoint undermines the whole visit</span></div>
+      <div class="list-item"><div class="list-dot dot-red"></div><span><strong>No children's waiting area</strong> — holds a sick child in adult corridors for hours</span></div>
+      <div class="list-item"><div class="list-dot dot-red"></div><span><strong>Navigation</strong> — can't find reception, gets lost between floors and buildings</span></div>
+      <div class="list-item"><div class="list-dot dot-amber"></div><span><strong>Paper records</strong> — must carry physical cards back and forth, risk of loss</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">What would make her choose Okhmatdyt over a private clinic</div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Transparent pricing for paid services — she can prepare in advance</span></div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Reliable appointment times that are actually respected</span></div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Friendly, professional front-desk staff</span></div>
+      <div class="list-item"><div class="list-dot dot-green"></div><span>Access to Okhmatdyt's specialist expertise — which private clinics can't match</span></div>
+    </div>
+
+    <div class="quote-box">
+      "At a private clinic you know the price before you walk in. Here you never know if you're supposed to pay something, how much, or to whom. That uncertainty is exhausting." — Interview #7
+    </div>
+
+    <div class="quote-box">
+      "The doctor was wonderful. But finding the registration desk was a quest. We wandered for twenty minutes with a sick child." — Interview #23
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

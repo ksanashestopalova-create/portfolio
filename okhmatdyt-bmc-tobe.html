@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Business Model Canvas TO BE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+    --blue-dot: #378ADD;
+    --green-dot: #639922;
+    --new-bg: #EAF3DE; --new-text: #3B6D11;
+    --changed-bg: #E6F1FB; --changed-text: #185FA5;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 12px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .bmc {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    min-height: 190px;
+  }
+
+  .cell-wide { grid-column: span 2; }
+
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    grid-column: span 5;
+  }
+
+  .cell-title {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border2);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .list-item {
+    display: flex;
+    gap: 7px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border2);
+    line-height: 1.45;
+    align-items: flex-start;
+    color: var(--text-mid);
+  }
+
+  .list-item:last-child { border-bottom: none; }
+  .list-item strong { color: var(--text); font-weight: 500; }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .flag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .flag-new { background: var(--new-bg); color: var(--new-text); }
+  .flag-changed { background: var(--changed-bg); color: var(--changed-text); }
+  .flag-primary { background: #FAEEDA; color: #854F0B; }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .bmc { grid-template-columns: repeat(2, 1fr); }
+    .cell-wide { grid-column: span 1; }
+    .bottom-row { grid-template-columns: 1fr; }
+    body { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Business Model Canvas — TO BE</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#639922"></div> New element</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#378ADD"></div> Existing or updated</div>
+</div>
+
+<div class="bmc">
+
+  <!-- KEY PARTNERS -->
+  <div class="cell">
+    <div class="cell-title">Key Partners</div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Charitable foundations</strong> — ongoing funding & equipment</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span><br><strong>GP / family doctors</strong> — referral & recommendation network (primary acquisition channel)</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span><br><strong>Insurance companies</strong> — family & child health coverage packages</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span><br><strong>Schools & class teachers</strong> — referral channel for preventive packages</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>University & academic dept.</strong> — redefined as genuine research partner</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span><br><strong>Media partners</strong> — health column, Okhmatdyt news</span></div>
+  </div>
+
+  <!-- KEY ACTIVITIES -->
+  <div class="cell cell-wide">
+    <div class="cell-title">Key Activities</div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span>Outpatient consultations, ambulatory & inpatient treatment</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Paid services administration</strong> — procurement, pricing, accounting load management</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Preventive & wellness services</strong> — check-up packages, sports physio, neurodevelopmental screening</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Continuous feedback loop</strong> — feedback box + website button, structured processing</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><span class="flag flag-changed">Updated</span> <strong>Staff training</strong> — external (digitisation vendors) + internal (service culture, patient-centred communication)</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Partnership management</strong> — insurers, schools, hospitals, GP network</span></div>
+  </div>
+
+  <!-- VALUE PROPOSITION -->
+  <div class="cell cell-wide">
+    <div class="cell-title">Value Proposition</div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span>Clinical depth of a specialist hospital + predictability & service standards of a private clinic — at a transparent price</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span>Access to rare specialists and complex diagnostics unavailable elsewhere in the region</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span>Unique niche services: <strong>neurodevelopmental screening, sports rehabilitation packages</strong></span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span>Social mission preserved — no patient turned away regardless of ability to pay</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> Preventive care focus — check-ups, early detection, health monitoring</span></div>
+  </div>
+
+  <!-- KEY RESOURCES -->
+  <div class="cell">
+    <div class="cell-title">Key Resources</div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Specialist physicians</strong> — the core competitive advantage</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span>Medical equipment & facilities</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><span class="flag flag-changed">Updated</span> <strong>Digital infrastructure</strong> — Dr. Eleks records system, online feedback tools</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Service protocols & training materials</strong> — embedded patient-centred standards</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Pricing framework</strong> — transparent, published, legally compliant</span></div>
+  </div>
+
+  <!-- CHANNELS -->
+  <div class="cell cell-wide">
+    <div class="cell-title">Channels</div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-primary">Primary</span> <strong>GP / family doctor referrals</strong> — main acquisition channel for paid segment</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Word of mouth</strong> — existing patients; strongest channel, already working</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>School partnerships</strong> — class teachers recommend preventive packages to parents</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><span class="flag flag-changed">Updated</span> <strong>Website</strong> — services, pricing, doctor profiles, online booking</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Phone & email</strong> — direct booking for paid appointments</span></div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span>Facebook page — community updates and health content</span></div>
+  </div>
+
+  <!-- CUSTOMER RELATIONSHIPS -->
+  <div class="cell">
+    <div class="cell-title">Customer Relationships</div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Patient service protocol</strong> — standards embedded in organisational culture</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Bonus system</strong> tied to patient satisfaction — not volume of paid services</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Feedback integration</strong> — offline + online, systematically processed</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Child-friendly waiting spaces</strong> — toys, dedicated areas, family environment</span></div>
+  </div>
+
+  <!-- CUSTOMER SEGMENTS -->
+  <div class="cell cell-wide">
+    <div class="cell-title">Customer Segments</div>
+    <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Segment 1 — Social:</strong> all children regardless of income; emergency, GP-referred, socially vulnerable. Covered by NHIF. Core mission — unchanged.</span></div>
+    <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">Segment 2 — Commercial:</span> self-referring families, middle to above-average income, experience with private clinics, willing to pay for quality and convenience.</span></div>
+  </div>
+
+  <!-- BOTTOM ROW -->
+  <div class="bottom-row">
+    <div class="cell">
+      <div class="cell-title">Cost Structure</div>
+      <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Facilities & utilities</strong> — Regional Government Authority</span></div>
+      <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Staff salaries</strong> — shifting to activity-based NHIF reimbursement</span></div>
+      <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> Staff training — external vendors + internal programmes</span></div>
+      <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> Paid services administration & procurement</span></div>
+      <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> Digital infrastructure maintenance (Dr. Eleks, website)</span></div>
+    </div>
+    <div class="cell">
+      <div class="cell-title">Revenue Streams</div>
+      <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>NHIF reimbursement</strong> — optimised through better clinical documentation</span></div>
+      <div class="list-item"><div class="dot" style="background:#378ADD"></div><span><strong>Grants & charitable donations</strong> — maintained, more actively pursued</span></div>
+      <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Paid services</strong> — consultations, lab tests, diagnostics, preventive packages, sports physio</span></div>
+      <div class="list-item"><div class="dot" style="background:#639922"></div><span><span class="flag flag-new">New</span> <strong>Insurance partnerships</strong> — family health coverage reimbursements</span></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

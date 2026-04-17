@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Discussion Guide: Doctor Contextual Interviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    padding: 40px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .page-heading {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .page-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .meta-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .meta-value {
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .context-box {
+    background: #E1F5EE;
+    border: 1px solid #9FE1CB;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: #085041;
+    line-height: 1.65;
+  }
+
+  .context-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0F6E56;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .intro-box {
+    background: #E6F1FB;
+    border: 1px solid #B5D4F4;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 12px;
+    color: #0C447C;
+    line-height: 1.65;
+  }
+
+  .intro-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #185FA5;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .section { margin-bottom: 28px; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    flex-shrink: 0;
+    color: #fff;
+  }
+
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .section-time {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .section-goal {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 14px;
+    padding-left: 40px;
+  }
+
+  .question-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .question-block:last-child { margin-bottom: 0; }
+
+  .main-q {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .probes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border2);
+    padding-top: 8px;
+  }
+
+  .probes li {
+    display: flex;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-mid);
+    padding: 3px 0;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+
+  .probe-label {
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--bg);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .note-box {
+    background: #FAEEDA;
+    border: 1px solid #EF9F27;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11px;
+    color: #633806;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  .obs-box {
+    background: #F5F0FA;
+    border: 1px solid #D8C8F0;
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+  }
+
+  .obs-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #533489;
+    margin-bottom: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .obs-item {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-mid);
+    margin-bottom: 6px;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+
+  .obs-item:last-child { margin-bottom: 0; }
+
+  .obs-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #7C3AED;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .closing-box {
+    background: #EAF3DE;
+    border: 1px solid #C0DD97;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 12px;
+    color: #27500A;
+    line-height: 1.65;
+  }
+
+  .closing-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #3B6D11;
+    margin-bottom: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .note {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 24px;
+    font-style: italic;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+
+  @media (max-width: 600px) {
+    body { padding: 24px; }
+    .meta-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Doctor & Medical Staff Interviews</div>
+
+<div class="meta-row">
+  <div class="meta-card">
+    <div class="meta-label">Participants</div>
+    <div class="meta-value">Doctors + nurses across departments</div>
+  </div>
+  <div class="meta-card">
+    <div class="meta-label">Duration</div>
+    <div class="meta-value">40–50 min interview + observation</div>
+  </div>
+  <div class="meta-card">
+    <div class="meta-label">Format</div>
+    <div class="meta-value">Contextual — in their workspace</div>
+  </div>
+</div>
+
+<div class="context-box">
+  <div class="context-label">Research context & goal</div>
+  These interviews were conducted to understand the actual clinical workflow — not the intended one. Digitisation (Dr. Eleks) had been introduced but adoption was inconsistent. Before designing a training programme, we needed to see where friction was, what workarounds had developed, and why the system wasn't being used as intended. The interviews were conducted in the doctors' own offices and combined with direct observation during working hours.
+</div>
+
+<div class="intro-box">
+  <div class="intro-label">Interviewer script — opening</div>
+  Thank you for making time for me. I know your schedule is demanding, so I'll be as efficient as possible. I'm a researcher working on a project to improve the hospital's service processes — not to evaluate your performance, but to understand how things actually work day to day. I'm especially interested in the documentation and records side of things: what takes time, what's frustrating, and what works well. I'd also like to observe you working briefly if you're comfortable with that. Everything you share is confidential. I'll be taking notes. Do you have any questions before we start?
+</div>
+
+<!-- OBSERVATION CHECKLIST -->
+<div class="obs-box">
+  <div class="obs-label">Observation checklist — watch for during the session</div>
+  <div class="obs-item"><div class="obs-dot"></div>How does the doctor open/access a patient record? Paper card, Dr. Eleks, or both?</div>
+  <div class="obs-item"><div class="obs-dot"></div>Who fills in the card — doctor or nurse? When exactly?</div>
+  <div class="obs-item"><div class="obs-dot"></div>Are there visible workarounds — sticky notes, separate notebooks, printed templates?</div>
+  <div class="obs-item"><div class="obs-dot"></div>How does the doctor write prescriptions and lab referrals? Handwritten slips?</div>
+  <div class="obs-item"><div class="obs-dot"></div>Is Dr. Eleks open on the screen? Is it being used actively or occasionally?</div>
+  <div class="obs-item"><div class="obs-dot"></div>What happens at the end of an appointment — where does the card go?</div>
+  <div class="obs-item"><div class="obs-dot"></div>How does the doctor know who is next? Queue management visible?</div>
+  <div class="obs-item"><div class="obs-dot"></div>Any moment of visible frustration, hesitation, or workaround — note it.</div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#185FA5;">1</div>
+    <div class="section-title">Warm-up — Daily work context</div>
+    <div class="section-time">~5 min</div>
+  </div>
+  <div class="section-goal">Goal: build trust, understand role and volume of work</div>
+
+  <div class="question-block">
+    <div class="main-q">Can you tell me a bit about your role here — what department, how long you've been working at Okhmatdyt, and roughly how many patients you see in a typical day?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Does the number vary a lot day to day?</li>
+      <li><span class="probe-label">probe</span>Do you see mostly new patients or repeat visits?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#0F6E56;">2</div>
+    <div class="section-title">The typical appointment — Workflow walkthrough</div>
+    <div class="section-time">~12 min</div>
+  </div>
+  <div class="section-goal">Goal: map the real workflow step by step — what happens, in what order, with what tools</div>
+
+  <div class="question-block">
+    <div class="main-q">Can you walk me through a typical patient appointment from start to finish — what you do, in what order, and what tools or documents you use?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>What's the first thing you do when a patient comes in?</li>
+      <li><span class="probe-label">probe</span>What information do you need to have in front of you?</li>
+      <li><span class="probe-label">probe</span>How do you record what happened during the appointment?</li>
+      <li><span class="probe-label">probe</span>What do you do at the end — what gets written, saved, handed over?</li>
+    </ul>
+    <div class="note-box">⚠ Let them narrate. Don't assume Dr. Eleks is being used — wait to see if they mention it. If not, probe later.</div>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">When you write a prescription or a lab referral — can you show me or describe exactly how you do that?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Is it always handwritten? Is there a standard format?</li>
+      <li><span class="probe-label">probe</span>Have you ever had a patient come back because they couldn't read what you wrote?</li>
+      <li><span class="probe-label">probe</span>Do you ever write the same information in more than one place?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">What happens with the patient's medical card after the appointment? Where does it go?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Do patients take it home with them? Does that ever cause problems?</li>
+      <li><span class="probe-label">probe</span>Have you ever had a situation where a card was lost or unavailable? What happened?</li>
+      <li><span class="probe-label">probe</span>What information do you actually need from previous visits — and how easy is it to access?</li>
+    </ul>
+    <div class="note-box">⚠ Key area: paper card system pain. Lost cards, duplication, lack of history access.</div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#533489;">3</div>
+    <div class="section-title">Digital system — Dr. Eleks usage and barriers</div>
+    <div class="section-time">~12 min</div>
+  </div>
+  <div class="section-goal">Goal: understand actual adoption, friction points, and workarounds — the key research question for training design</div>
+
+  <div class="question-block">
+    <div class="main-q">Do you use Dr. Eleks in your daily work? Can you show me or describe how?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>What do you use it for specifically?</li>
+      <li><span class="probe-label">probe</span>Are there things you do in Dr. Eleks and things you still do on paper — why the split?</li>
+      <li><span class="probe-label">probe</span>On a typical day, how much of your documentation ends up in the system vs on paper?</li>
+    </ul>
+    <div class="note-box">⚠ Don't ask "why don't you use it more" — that puts them on the defensive. Let them describe what they do and work backwards to the friction.</div>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">When you do use Dr. Eleks, where does it slow you down or feel difficult?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Are there steps that feel unnecessary or repetitive?</li>
+      <li><span class="probe-label">probe</span>Has it ever caused a problem during an appointment — something that made you switch back to paper?</li>
+      <li><span class="probe-label">probe</span>What would need to change for it to actually save you time rather than add to it?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">When you first started using Dr. Eleks, how did you learn to use it? Was there training?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Was the training useful, or did you mostly figure it out yourself?</li>
+      <li><span class="probe-label">probe</span>Who do you ask when you're unsure how to do something in the system?</li>
+      <li><span class="probe-label">probe</span>If you were designing the training for a new colleague, what would you make sure to include?</li>
+    </ul>
+    <div class="note-box">⚠ This is the core insight for training design — what do people actually need vs what they were given.</div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#854F0B;">4</div>
+    <div class="section-title">Friction & workarounds — What's broken</div>
+    <div class="section-time">~8 min</div>
+  </div>
+  <div class="section-goal">Goal: surface hidden workarounds and systemic inefficiencies</div>
+
+  <div class="question-block">
+    <div class="main-q">What part of your administrative work takes the most time — things that feel like they shouldn't take as long as they do?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Is there anything you do repeatedly that feels like it should happen automatically?</li>
+      <li><span class="probe-label">probe</span>Do you ever enter the same information more than once?</li>
+      <li><span class="probe-label">probe</span>What do you spend time on at the end of the day that takes you away from patients?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">Have you developed any personal shortcuts or workarounds — things you do differently from how you were trained, because it works better for you?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Do other doctors in your department do things similarly?</li>
+      <li><span class="probe-label">probe</span>Has anyone ever told you that your workaround caused a problem downstream?</li>
+    </ul>
+    <div class="note-box">⚠ Workarounds are gold — they reveal where the official system fails real work. Frame this as curiosity, not criticism.</div>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num" style="background:#A32D2D;">5</div>
+    <div class="section-title">Patient interaction & service perception</div>
+    <div class="section-time">~8 min</div>
+  </div>
+  <div class="section-goal">Goal: understand doctors' perspective on service quality and patient complaints</div>
+
+  <div class="question-block">
+    <div class="main-q">From your experience, what do patients and families most often complain about when it comes to their visit here?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Is it usually about the medical side, or more about the organisation — waiting, reception, paperwork?</li>
+      <li><span class="probe-label">probe</span>Have you ever had a patient who was frustrated before they even got to you?</li>
+      <li><span class="probe-label">probe</span>What do you usually do in those situations?</li>
+    </ul>
+  </div>
+
+  <div class="question-block">
+    <div class="main-q">If you could change one thing about how the clinic operates — not the medical side, but the organisational side — what would it be?</div>
+    <ul class="probes">
+      <li><span class="probe-label">probe</span>Is that something you've raised before? What happened?</li>
+      <li><span class="probe-label">probe</span>What do you think stops that from changing?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CLOSING -->
+<div class="closing-box">
+  <div class="closing-label">Closing script</div>
+  Thank you — this has been incredibly useful. Before we finish, is there anything about how you work or how the clinic operates that you'd like to add — anything we haven't covered? [pause] One last question: if there were one thing that, if fixed, would make your working day noticeably easier — what would it be? We really appreciate your time. Your input will directly inform how we design any changes to the documentation system and training programme.
+</div>
+
+</body>
+</html>

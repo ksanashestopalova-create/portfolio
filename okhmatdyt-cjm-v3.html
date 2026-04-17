@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Okhmatdyt — Customer Journey Map v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --surface: #ffffff;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.06);
+    --text: #1a1714;
+    --text-mid: #4a4540;
+    --text-muted: #8a8480;
+    /* severity colors */
+    --client: #E24B4A;
+    --client-bg: #FCEBEB;
+    --clinic: #EF9F27;
+    --clinic-bg: #FAEEDA;
+    --legal: #854F0B;
+    --legal-bg: #F5E6C8;
+    /* CCP */
+    --ccp: #7C3AED;
+    --ccp-bg: #F5F0FA;
+    /* positive */
+    --green: #639922;
+    --green-bg: #EAF3DE;
+    /* intervention */
+    --int: #0F6E56;
+    --int-bg: #E1F5EE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 11px;
+    color: var(--text);
+    padding: 32px;
+    line-height: 1.5;
+  }
+
+  .page-title { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .page-heading { font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .page-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; align-items: center; }
+  .legend-title { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-right: 4px; }
+  .leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-mid); }
+  .leg-icon { width: 14px; height: 14px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; flex-shrink: 0; }
+  .ccp-badge { background: var(--ccp); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; }
+
+  /* TABLE */
+  .cjm { width: 100%; overflow-x: auto; }
+  table { border-collapse: collapse; min-width: 1400px; width: 100%; }
+  th, td { border: 0.5px solid var(--border); padding: 8px 10px; vertical-align: top; text-align: left; }
+
+  .col-header { background: #f2ede6; font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); white-space: nowrap; font-family: 'IBM Plex Mono', monospace; }
+  .col-header.is-ccp { background: var(--ccp-bg); border-top: 3px solid var(--ccp); }
+
+  .row-label { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; white-space: nowrap; min-width: 90px; font-family: 'IBM Plex Mono', monospace; }
+  .label-customer { background: #185FA5; color: #fff; }
+  .label-touchpoint { background: #3B6D11; color: #fff; }
+  .label-emotion { background: #854F0B; color: #fff; }
+  .label-pain { background: #A32D2D; color: #fff; }
+  .label-intervention { background: #0F6E56; color: #fff; }
+
+  .row-customer { background: #EEF4FB; }
+  .row-touchpoint { background: #EAF3DE; }
+  .row-emotion { background: #FAEEDA; }
+  .row-pain { background: #FDF0F0; }
+  .row-intervention { background: #E1F5EE; }
+
+  /* CCP column highlight */
+  .ccp-col { background: rgba(124,58,237,0.04) !important; border-left: 2px solid var(--ccp) !important; border-right: 2px solid var(--ccp) !important; }
+
+  /* stage header cell */
+  .stage-num { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: var(--text-muted); margin-bottom: 2px; }
+  .stage-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stage-time { font-size: 10px; color: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+  .ccp-label { display: inline-flex; align-items: center; gap: 4px; background: var(--ccp); color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; margin-top: 4px; }
+
+  /* items */
+  .item { display: flex; gap: 5px; margin-bottom: 4px; line-height: 1.4; align-items: flex-start; font-size: 11px; color: var(--text-mid); }
+  .item:last-child { margin-bottom: 0; }
+  .d { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+
+  /* pain pills */
+  .pain-pill { border-radius: 4px; padding: 4px 7px; margin-bottom: 4px; font-size: 10px; line-height: 1.4; display: flex; gap: 5px; align-items: flex-start; }
+  .pain-pill:last-child { margin-bottom: 0; }
+  .pill-client { background: var(--client-bg); color: #791F1F; border-left: 3px solid var(--client); }
+  .pill-clinic { background: var(--clinic-bg); color: #633806; border-left: 3px solid var(--clinic); }
+  .pill-legal { background: var(--legal-bg); color: var(--legal); border-left: 3px solid var(--legal); }
+  .pill-icon { flex-shrink: 0; font-weight: 700; font-size: 10px; }
+
+  /* intervention pills */
+  .int-pill { background: var(--int-bg); color: #085041; border-left: 3px solid var(--int); border-radius: 4px; padding: 4px 7px; margin-bottom: 4px; font-size: 10px; line-height: 1.4; font-weight: 500; }
+  .int-pill:last-child { margin-bottom: 0; }
+
+  /* emotion bar */
+  .emo { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .emo-bar { height: 7px; border-radius: 3px; flex-shrink: 0; }
+  .emo-label { font-size: 10px; color: var(--text-muted); }
+  .quote { font-style: italic; font-size: 10px; color: var(--text-muted); border-left: 2px solid #378ADD; padding-left: 6px; margin-top: 4px; line-height: 1.4; }
+
+  .note { font-size: 11px; color: var(--text-muted); margin-top: 16px; font-style: italic; border-top: 1px solid var(--border); padding-top: 10px; }
+
+  .arrow-row td { background: #f2ede6; text-align: center; font-size: 16px; color: var(--text-muted); padding: 4px; border: none; }
+</style>
+</head>
+<body>
+
+<div class="page-heading">Customer Journey Map — Outpatient Self-Referral · v3</div>
+
+<div class="legend">
+  <span class="legend-title">Pain coding:</span>
+  <div class="leg"><div class="leg-icon" style="background:var(--client);color:#fff;">C</div> Client problem</div>
+  <div class="leg"><div class="leg-icon" style="background:var(--clinic);color:#fff;">O</div> Clinic/ops problem</div>
+  <div class="leg"><div class="leg-icon" style="background:var(--legal);color:#fff;">L</div> Legal/compliance risk</div>
+  <span style="margin-left:8px;border-left:1px solid var(--border);padding-left:8px;" class="legend-title">System:</span>
+  <div class="leg"><span class="ccp-badge">CCP</span> Critical Control Point — where the system breaks</div>
+  <div class="leg" style="margin-left:8px;"><div class="leg-icon" style="background:var(--int);color:#fff;">→</div> TO BE intervention</div>
+</div>
+
+<div class="cjm">
+<table>
+  <thead>
+    <tr>
+      <th class="col-header" style="min-width:90px;">Layer</th>
+      <th class="col-header">1 · Search & decide<br><span style="font-weight:400;font-size:9px;">2–3 hrs</span></th>
+      <th class="col-header is-ccp">2 · Book appointment<br><span style="font-weight:400;font-size:9px;">15 min</span></th>
+      <th class="col-header">3 · Travel to clinic<br><span style="font-weight:400;font-size:9px;">5–20 min+</span></th>
+      <th class="col-header is-ccp">4 · Confirm arrival<br><span style="font-weight:400;font-size:9px;">up to 10 min</span></th>
+      <th class="col-header is-ccp">5 · Find & reach doctor<br><span style="font-weight:400;font-size:9px;">30 min – 4 hrs</span></th>
+      <th class="col-header">6 · Consultation<br><span style="font-weight:400;font-size:9px;">30 min</span></th>
+      <th class="col-header">7 · Buy medicines<br><span style="font-weight:400;font-size:9px;">up to 1 hr</span></th>
+      <th class="col-header">8 · Toilet with child<br><span style="font-weight:400;font-size:9px;">10 min</span></th>
+      <th class="col-header is-ccp">9 · Sign documents<br><span style="font-weight:400;font-size:9px;">5 min – 1 hr</span></th>
+      <th class="col-header">10 · Additional tests<br><span style="font-weight:400;font-size:9px;">up to 1 hr</span></th>
+      <th class="col-header">11 · Leave feedback<br><span style="font-weight:400;font-size:9px;">up to 30 min</span></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- CUSTOMER ACTIONS -->
+    <tr class="row-customer">
+      <td class="row-label label-customer">Customer actions</td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Searches online, asks friends, parent forums</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Finds phone number on website or from GP</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Decides to go to Okhmatdyt specifically</div>
+      </td>
+      <td class="ccp-col">
+        <div class="ccp-label">⚠ CCP</div>
+        <div class="item" style="margin-top:6px;"><div class="d" style="background:#378ADD"></div>Calls reception to book</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Gives name, child details, preferred time</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Receives verbal confirmation only</div>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Travels by public transport or car</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Families from region travel 1–3 hrs</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Arrives at hospital building</div>
+      </td>
+      <td class="ccp-col">
+        <div class="ccp-label">⚠ CCP</div>
+        <div class="item" style="margin-top:6px;"><div class="d" style="background:#378ADD"></div>Searches for reception (often can't find it)</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Queues at desk again</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Repeats all details already given by phone</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Receives physical token</div>
+      </td>
+      <td class="ccp-col">
+        <div class="ccp-label">⚠ CCP</div>
+        <div class="item" style="margin-top:6px;"><div class="d" style="background:#378ADD"></div>Finds department/cabinet number</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Joins live queue in corridor</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Waits 30 min – 4 hrs with sick child</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Watches others skip queue</div>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Enters doctor's room</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Repeats child details to nurse</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Doctor examines child</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Receives handwritten prescription + referrals</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Unclear whether to pay and how much</div>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Goes to pharmacy (outside hospital)</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Tries to read handwritten prescription</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Asks pharmacist to decipher doctor's writing</div>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Takes child to toilet</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Navigates to find facilities</div>
+      </td>
+      <td class="ccp-col">
+        <div class="ccp-label">⚠ CCP</div>
+        <div class="item" style="margin-top:6px;"><div class="d" style="background:#378ADD"></div>Asked to sign sanitary declarations, consent forms</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Often unclear what they are signing</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>"Voluntary donation" receipt if child not registered</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Goes to cashier to pay</div>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Goes to lab if referral given</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Queues again at lab</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Returns on separate day to collect paper results</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Brings results back to doctor manually</div>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>No one asks for feedback</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>May call reception to book follow-up</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Leaves with paper card + handwritten documents</div>
+      </td>
+    </tr>
+
+    <!-- TOUCHPOINTS -->
+    <tr class="row-touchpoint">
+      <td class="row-label label-touchpoint">Touchpoints</td>
+      <td>Website · Forums · Word of mouth · GP office</td>
+      <td class="ccp-col"><strong style="color:#A32D2D;">Reception (phone) ①</strong></td>
+      <td>Public transport · Building entrance · Signage (absent)</td>
+      <td class="ccp-col"><strong style="color:#A32D2D;">Reception desk (in person) ②</strong> · Token system</td>
+      <td class="ccp-col">Corridor · Live queue · Other patients · <strong style="color:#A32D2D;">No staff present</strong></td>
+      <td>Doctor · Nurse · Medical card · Handwritten slips</td>
+      <td>External pharmacy · Handwritten prescription</td>
+      <td>Toilet facilities · Signage</td>
+      <td class="ccp-col">Consent forms · Cashier · <strong style="color:#A32D2D;">Reception ③</strong></td>
+      <td>Lab desk · Paper results · Lab journal</td>
+      <td><strong style="color:#A32D2D;">Reception (phone) ④</strong> · Paper card · No feedback channel</td>
+    </tr>
+
+    <!-- EMOTION -->
+    <tr class="row-emotion">
+      <td class="row-label label-emotion">Emotional curve</td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:55px;background:#EF9F27;"></div><span class="emo-label">Anxious, hopeful</span></div>
+        <div class="quote">"I've heard they have good specialists here."</div>
+      </td>
+      <td class="ccp-col">
+        <div class="emo"><div class="emo-bar" style="width:30px;background:#E24B4A;"></div><span class="emo-label">Frustrated</span></div>
+        <div class="quote">"The woman on the phone was rude. I just wanted to book."</div>
+      </td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:45px;background:#EF9F27;"></div><span class="emo-label">Neutral / tired</span></div>
+        <div class="quote">"We drove 2 hours. I hope it's worth it."</div>
+      </td>
+      <td class="ccp-col">
+        <div class="emo"><div class="emo-bar" style="width:15px;background:#E24B4A;"></div><span class="emo-label">Low — stressed</span></div>
+        <div class="quote">"Why do I have to give all my details again? I already called."</div>
+      </td>
+      <td class="ccp-col">
+        <div class="emo"><div class="emo-bar" style="width:8px;background:#E24B4A;"></div><span class="emo-label">Lowest point</span></div>
+        <div class="quote">"We wandered 20 min with a sick child just to find reception. Then waited 2 hours anyway."</div>
+      </td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:100px;background:#639922;"></div><span class="emo-label">High — relieved</span></div>
+        <div class="quote">"The doctor was wonderful — calm, thorough, kind to my son."</div>
+      </td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:40px;background:#EF9F27;"></div><span class="emo-label">Confused</span></div>
+        <div class="quote">"I couldn't read what the doctor wrote. The pharmacist had to guess."</div>
+      </td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:30px;background:#E24B4A;"></div><span class="emo-label">Exhausted</span></div>
+        <div class="quote">"Finding the bathroom with a toddler was its own quest."</div>
+      </td>
+      <td class="ccp-col">
+        <div class="emo"><div class="emo-bar" style="width:20px;background:#E24B4A;"></div><span class="emo-label">Confused, anxious</span></div>
+        <div class="quote">"I didn't understand what I was signing. And suddenly they wanted a 'donation'."</div>
+      </td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:35px;background:#EF9F27;"></div><span class="emo-label">Neutral / resigned</span></div>
+        <div class="quote">"I have to come back another day just for results. And then bring them myself to the doctor."</div>
+      </td>
+      <td>
+        <div class="emo"><div class="emo-bar" style="width:25px;background:#E24B4A;"></div><span class="emo-label">Drops again</span></div>
+        <div class="quote">"I have to call that reception again. And they can't even give me a time."</div>
+      </td>
+    </tr>
+
+    <!-- PAIN POINTS -->
+    <tr class="row-pain">
+      <td class="row-label label-pain">Pain points</td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Website has no service list, pricing or doctor profiles</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>No online booking — phone or walk-in only</div>
+      </td>
+      <td class="ccp-col">
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Receptionist rude on phone — negative first impression before arrival</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>No written confirmation — verbal only, no reminder</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>Booking gives no guaranteed time advantage — leads to live queue regardless</div>
+        <div class="pain-pill pill-legal"><span class="pill-icon">L</span>No clarity on payment — ambiguous whether informal payment expected</div>
+      </td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>No wayfinding at building entrance — no signage for reception</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Families from regions spend 2–3 hrs travelling with no certainty visit will happen</div>
+      </td>
+      <td class="ccp-col">
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Patient must repeat all details already given by phone — duplicate data entry</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Reception impossible to find — basement location, no signage</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>Token times are meaningless — no connection to actual queue position</div>
+        <div class="pain-pill pill-legal"><span class="pill-icon">L</span>"Voluntary donation" collected without clear legal basis or receipt in all cases</div>
+      </td>
+      <td class="ccp-col">
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Sick children held in adult corridors 30 min – 4 hrs — no children's waiting area</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Queue-jumping by patients who paid doctors directly — uncontrolled, demoralising</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>No queue management — no staff present, chaotic and unfair</div>
+        <div class="pain-pill pill-legal"><span class="pill-icon">L</span>Informal payments to doctors = unrecorded income, compliance risk</div>
+      </td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Patient repeats child's details to nurse for 3rd time — no data continuity</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Paper medical cards lost or incomplete — no backup</div>
+        <div class="pain-pill pill-legal"><span class="pill-icon">L</span>Informal payment expectation — no published price list, no formal payment process</div>
+      </td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Handwritten prescriptions illegible — patients can't read them</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>No standardised prescription format — pharmacist interprets</div>
+      </td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>No designated toilet for children / families with small children</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Toilet hard to find — no signage</div>
+      </td>
+      <td class="ccp-col">
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Consent forms not explained — patients sign without understanding</div>
+        <div class="pain-pill pill-legal"><span class="pill-icon">L</span>"Voluntary donation" process legally ambiguous — not all patients receive receipts</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>Documents prepared manually per patient — no templates or automation</div>
+      </td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Results available only on a specific return day — extra trip for parents</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Patient must physically carry results back to treating doctor</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>Lab results reach doctor once daily by hand — delays in treatment decisions</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>Lab data siloed — not integrated with outpatient records</div>
+      </td>
+      <td>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>No feedback channel exists — no way to report problems</div>
+        <div class="pain-pill pill-client"><span class="pill-icon">C</span>Follow-up requires calling hostile reception again</div>
+        <div class="pain-pill pill-clinic"><span class="pill-icon">O</span>No data collected on patient satisfaction — no learning loop for institution</div>
+      </td>
+    </tr>
+
+    <!-- INTERVENTIONS -->
+    <tr class="row-intervention">
+      <td class="row-label label-intervention">TO BE interventions</td>
+      <td>
+        <div class="int-pill">Updated website: service list, pricing, doctor profiles</div>
+        <div class="int-pill">GP referral partnership — structured channel</div>
+      </td>
+      <td class="ccp-col">
+        <div class="int-pill">Service training + satisfaction bonus system for reception</div>
+        <div class="int-pill">Online booking option (phone retained for elderly)</div>
+        <div class="int-pill">Transparent pricing published before visit</div>
+        <div class="int-pill">Booking confirmation sent digitally</div>
+      </td>
+      <td>
+        <div class="int-pill">Wayfinding signage at building entrance and key junctions</div>
+      </td>
+      <td class="ccp-col">
+        <div class="int-pill">Dr. Eleks: arrival confirmed digitally — no duplicate data entry</div>
+        <div class="int-pill">Token system eliminated — patient gives name, goes to department</div>
+        <div class="int-pill">Voluntary donation replaced by formal paid services with receipt</div>
+      </td>
+      <td class="ccp-col">
+        <div class="int-pill">Paid appointment slots with guaranteed times — booking confers real advantage</div>
+        <div class="int-pill">Children's waiting area with toys and seating</div>
+        <div class="int-pill">Informal payments structurally blocked — Dr. Eleks prevents unscheduled patients during hours</div>
+        <div class="int-pill">Nurse manages queue from system — patients called by name</div>
+      </td>
+      <td>
+        <div class="int-pill">Dr. Eleks: patient data pre-loaded — no re-entry by nurse</div>
+        <div class="int-pill">Digital records — no paper card loss risk</div>
+        <div class="int-pill">Printed prescriptions replace handwriting</div>
+        <div class="int-pill">Formal paid services pricing — no ambiguity</div>
+      </td>
+      <td>
+        <div class="int-pill">Printed prescriptions with standard format + pharmacy-friendly layout</div>
+      </td>
+      <td>
+        <div class="int-pill">Designated family/child toilet with signage</div>
+        <div class="int-pill">Wayfinding to facilities throughout building</div>
+      </td>
+      <td class="ccp-col">
+        <div class="int-pill">Consent forms explained verbally + plain-language versions</div>
+        <div class="int-pill">Formal cashier payment for all paid services — replaces donation system</div>
+        <div class="int-pill">Payment terminal + cash options</div>
+      </td>
+      <td>
+        <div class="int-pill">Lab results auto-transferred to Dr. Eleks — no manual delivery</div>
+        <div class="int-pill">Patient notified digitally when results ready</div>
+        <div class="int-pill">Results visible to treating doctor immediately</div>
+      </td>
+      <td>
+        <div class="int-pill">QR code feedback + paper box in clinic</div>
+        <div class="int-pill">Follow-up booked in system before patient leaves</div>
+        <div class="int-pill">Weekly feedback digest → director → bonuses + training</div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+
+<h2 class="sr-only">Intervention Impact Map — Okhmatdyt</h2>
+<style>
+  .imap { width: 100%; overflow-x: auto; padding: 1rem 0; }
+  table { border-collapse: collapse; width: 100%; min-width: 900px; font-size: 12px; }
+  th, td { border: 0.5px solid var(--color-border-secondary); padding: 10px 12px; vertical-align: top; text-align: left; }
+  .col-h { background: var(--color-background-secondary); font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); }
+  .int-cell { background: var(--color-background-primary); min-width: 160px; }
+  .int-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+  .int-tag { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 4px; margin-top: 2px; }
+  .tag-rev { background: #EAF3DE; color: #27500A; }
+  .tag-data { background: #E6F1FB; color: #0C447C; }
+  .tag-svc { background: #FAEEDA; color: #633806; }
+  .item { display: flex; gap: 6px; margin-bottom: 5px; font-size: 12px; color: var(--color-text-primary); line-height: 1.4; align-items: flex-start; }
+  .item:last-child { margin-bottom: 0; }
+  .d { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .risk-pill { background: #FCEBEB; border-left: 2px solid #E24B4A; border-radius: 0 4px 4px 0; padding: 4px 8px; margin-bottom: 4px; font-size: 11px; color: #791F1F; line-height: 1.4; }
+  .risk-pill.amber { background: #FAEEDA; border-left-color: #EF9F27; color: #633806; }
+  .risk-pill.critical { background: #F7C1C1; border-left: 3px solid #A32D2D; color: #501313; }
+  .risk-pill:last-child { margin-bottom: 0; }
+  .risk-level { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 2px; }
+  .level-critical { color: #501313; }
+  .level-high { color: #A32D2D; }
+  .level-med { color: #854F0B; }
+  .second-item { display: flex; gap: 6px; margin-bottom: 5px; font-size: 11px; color: var(--color-text-secondary); line-height: 1.4; align-items: flex-start; font-style: italic; }
+  .second-item.highlight { color: var(--color-text-primary); font-style: normal; font-weight: 500; }
+  .second-item:last-child { margin-bottom: 0; }
+  .arrow { color: var(--color-text-secondary); flex-shrink: 0; font-size: 10px; margin-top: 2px; }
+  .section-divider { font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-secondary); margin: 8px 0 4px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 6px; }
+</style>
+
+<div class="imap">
+<table>
+  <thead>
+    <tr>
+      <th class="col-h" style="min-width:160px;">Intervention</th>
+      <th class="col-h">Direct effect</th>
+      <th class="col-h">Second-order effects</th>
+      <th class="col-h">Risks & dependencies</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td class="int-cell">
+        <div class="int-name">Paid services framework</div>
+        <span class="int-tag tag-rev">Revenue</span>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#639922"></div>New revenue stream from self-referring patients</div>
+        <div class="item"><div class="d" style="background:#639922"></div>Transparent pricing replaces informal payment system</div>
+        <div class="item"><div class="d" style="background:#639922"></div>After-hours use of existing premises and staff</div>
+      </td>
+      <td>
+        <div class="second-item"><span class="arrow">→</span>Accounting load increases — cashier system, invoicing, tax reporting required</div>
+        <div class="second-item"><span class="arrow">→</span>Doctors in paid hours may expect additional compensation — salary model revision needed</div>
+        <div class="second-item"><span class="arrow">→</span>Pricing policy requires legal approval from governing body — new administrative process</div>
+        <div class="section-divider">Systemic risk</div>
+        <div class="second-item highlight"><span class="arrow" style="color:#A32D2D;">→</span>Mission drift: revenue logic ("more paid patients = more money") can gradually override social mission ("we treat all children"). Organisation transitions from social business to de facto private clinic — destroying the core value proposition.</div>
+      </td>
+      <td>
+        <div class="risk-pill critical">
+          <div class="risk-level level-critical">Critical</div>
+          Mission drift — no governance mechanism to prevent revenue logic from overriding social mission. Requires explicit policy: paid services are capped as a % of total capacity. Social patients always take priority.
+        </div>
+        <div class="risk-pill">
+          <div class="risk-level level-high">High</div>
+          Legal framework — paid services must be approved by hospital governing authority. Delay or refusal blocks entire stream.
+        </div>
+        <div class="risk-pill amber">
+          <div class="risk-level level-med">Medium</div>
+          Staff resistance — doctors may refuse after-hours paid work without clear compensation model.
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="int-cell">
+        <div class="int-name">Dr. Eleks digitisation</div>
+        <span class="int-tag tag-data">Data infrastructure</span>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Single source of truth for patient records</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Eliminates triple manual data entry</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Structurally blocks informal payments via scheduling</div>
+        <div class="item"><div class="d" style="background:#378ADD"></div>Auto-generates compliance reports for NHIF</div>
+      </td>
+      <td>
+        <div class="second-item"><span class="arrow">→</span>IT support function needed — maintenance, hardware failures, updates</div>
+        <div class="second-item"><span class="arrow">→</span>Training programme required — ongoing, not one-off, for all new staff</div>
+        <div class="second-item"><span class="arrow">→</span>Doctors blocked from informal income → compensation expectations rise → salary model pressure</div>
+        <div class="second-item"><span class="arrow">→</span>GDPR obligations formalised — data retention policy, access controls, processing agreements needed</div>
+        <div class="second-item"><span class="arrow">→</span>Hardware dependency — computers in each department, reliable internet required</div>
+      </td>
+      <td>
+        <div class="risk-pill">
+          <div class="risk-level level-high">High</div>
+          Adoption resistance — if senior doctors refuse system, informal workarounds return and shadow process persists.
+        </div>
+        <div class="risk-pill">
+          <div class="risk-level level-high">High</div>
+          Infrastructure dependency — hardware investment and connectivity outside researcher's control.
+        </div>
+        <div class="risk-pill amber">
+          <div class="risk-level level-med">Medium</div>
+          GDPR exposure — digital records require formal data governance framework.
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="int-cell">
+        <div class="int-name">Service culture + incentive system</div>
+        <span class="int-tag tag-svc">People & culture</span>
+      </td>
+      <td>
+        <div class="item"><div class="d" style="background:#EF9F27"></div>Bonus system ties compensation to patient satisfaction</div>
+        <div class="item"><div class="d" style="background:#EF9F27"></div>Service standard defines expected behaviour at each touchpoint</div>
+        <div class="item"><div class="d" style="background:#EF9F27"></div>Feedback loop created: patient → management → staff behaviour</div>
+      </td>
+      <td>
+        <div class="second-item"><span class="arrow">→</span>Budget increases — bonus fund requires new approved budget line</div>
+        <div class="second-item"><span class="arrow">→</span>HR policy revision — bonus system must be documented in employment contracts and collective agreement</div>
+        <div class="second-item"><span class="arrow">→</span>Management capacity required — someone must process feedback weekly and manage bonus calculations</div>
+        <div class="second-item"><span class="arrow">→</span>Cultural resistance — long-tenure staff may reject external standard as top-down imposition</div>
+        <div class="section-divider">Systemic risk</div>
+        <div class="second-item highlight"><span class="arrow" style="color:#A32D2D;">→</span>Internal equity problem: polyclinic staff receive bonuses, hospital staff (surgeons, inpatient teams) do not. Creates perceived unfairness across departments → pressure on administration to extend system hospital-wide → budget impact multiplies significantly → potential inter-departmental conflict.</div>
+      </td>
+      <td>
+        <div class="risk-pill critical">
+          <div class="risk-level level-critical">Critical</div>
+          Internal equity — bonus limited to polyclinic creates organisational imbalance. Requires decision: extend to all staff (budget x3–5) or create explicit, communicated rationale for the scope boundary.
+        </div>
+        <div class="risk-pill">
+          <div class="risk-level level-high">High</div>
+          Legal complexity — changes require trade union agreement and collective contract amendment. Timeline unpredictable.
+        </div>
+        <div class="risk-pill amber">
+          <div class="risk-level level-med">Medium</div>
+          Perverse incentive — if bonus tied to paid service volume (not satisfaction), staff will push unnecessary paid appointments.
+        </div>
+        <div class="risk-pill amber">
+          <div class="risk-level level-med">Medium</div>
+          Sustainability — culture change requires sustained management attention. Leadership change collapses programme.
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
