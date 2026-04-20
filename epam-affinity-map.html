@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affinity Map — People Risk Discovery</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f7f4ef;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1714;
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8a8480;
+    margin-bottom: 8px;
+  }
+
+  .method-note {
+    font-size: 12px;
+    color: #4a4540;
+    font-style: italic;
+    background: #ffffff;
+    border-left: 3px solid #8a8480;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 32px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 16px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* THEMES GRID */
+  .themes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .theme {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .theme-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .theme-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .theme-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 4px;
+  }
+
+  .theme-desc {
+    font-size: 11px;
+    color: #8a8480;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* THEME COLORS */
+  .t1 .theme-header { background: #EEF4FB; }
+  .t1 .theme-num { color: #185FA5; }
+  .t1 .theme-bar { background: #378ADD; }
+
+  .t2 .theme-header { background: #FFF3E0; }
+  .t2 .theme-num { color: #854F0B; }
+  .t2 .theme-bar { background: #EF9F27; }
+
+  .t3 .theme-header { background: #FDF0F0; }
+  .t3 .theme-num { color: #A32D2D; }
+  .t3 .theme-bar { background: #E24B4A; }
+
+  .theme-bar {
+    height: 3px;
+    width: 100%;
+  }
+
+  /* QUOTES */
+  .quotes {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quote {
+    background: #f9f7f4;
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 12px;
+    font-style: italic;
+    color: #4a4540;
+    line-height: 1.5;
+    position: relative;
+  }
+
+  .quote::before {
+    content: '"';
+    font-size: 24px;
+    color: #d0cbc4;
+    font-style: normal;
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    line-height: 1;
+  }
+
+  .quote-text {
+    padding-left: 16px;
+  }
+
+  /* PATTERN */
+  .pattern {
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .t1 .pattern { background: #E6F1FB; color: #185FA5; }
+  .t2 .pattern { background: #FAEEDA; color: #854F0B; }
+  .t3 .pattern { background: #FCEBEB; color: #A32D2D; }
+
+  .pattern-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* CENTRAL INSIGHT */
+  .insight {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .insight-header {
+    background: #1a1714;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .insight-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+  }
+
+  .insight-body {
+    padding: 24px;
+    text-align: center;
+  }
+
+  .insight-statement {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1714;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .insight-sub {
+    font-size: 13px;
+    color: #8a8480;
+    font-style: italic;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ARROWS */
+  .arrows {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 0 16px 0;
+    padding: 0 40px;
+  }
+
+  .arrow-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .arrow-line {
+    width: 2px;
+    height: 30px;
+    border-left: 2px dashed #c0b8ac;
+  }
+
+  .arrow-head {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid #c0b8ac;
+  }
+
+  /* WHAT CHANGED */
+  .pivot {
+    background: #E1F5EE;
+    border: 1px solid rgba(15,110,86,0.2);
+    border-left: 3px solid #0F6E56;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+  }
+
+  .pivot-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0F6E56;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  .pivot p {
+    font-size: 13px;
+    color: #1a1714;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>Affinity Map — People Risk Discovery</h1>
+<div class="subtitle">Synthesis from 50+ in-depth interviews · EPAM Systems engineering unit · 2018</div>
+<div class="method-note">
+  Themes reconstructed from field notes and interview records. Raw data collected through one-on-one conversations across the unit, conducted over two weeks. Quotes are representative composites — anonymised and paraphrased to protect participant identity.
+</div>
+
+<!-- THEMES -->
+<div class="section-label">Three themes from 50+ conversations</div>
+
+<div class="themes">
+
+  <!-- THEME 1 -->
+  <div class="theme t1">
+    <div class="theme-bar"></div>
+    <div class="theme-header">
+      <div class="theme-num">Theme 01</div>
+      <div class="theme-title">The organisation has become abstract</div>
+      <div class="theme-desc">People no longer recognise the company they joined. Strategic messages feel disconnected from daily reality.</div>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <div class="quote-text">I stopped going to town halls. It feels like they're talking about some other company.</div>
+      </div>
+      <div class="quote">
+        <div class="quote-text">They multiplied the processes. Just chaos — press this button, then that one, to get the smallest thing done.</div>
+      </div>
+      <div class="quote">
+        <div class="quote-text">The company doesn't care about us. We're just cogs. If you're useful — great. If not — goodbye.</div>
+      </div>
+      <div class="pattern">
+        <span class="pattern-label">Pattern</span>
+        Loss of institutional trust. People feel like passengers in an organisation moving in an unknown direction.
+      </div>
+    </div>
+  </div>
+
+  <!-- THEME 2 -->
+  <div class="theme t2">
+    <div class="theme-bar"></div>
+    <div class="theme-header">
+      <div class="theme-num">Theme 02</div>
+      <div class="theme-title">The outside feels clearer than the inside</div>
+      <div class="theme-desc">Leaving has become easier to imagine than staying. The job market appears more predictable than the current employer.</div>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <div class="quote-text">Honestly, it's easier to just go through a normal interview somewhere else. At least there everything is clear.</div>
+      </div>
+      <div class="quote">
+        <div class="quote-text">They only remember you exist when you already have an offer from somewhere else. So an offer is the only way?</div>
+      </div>
+      <div class="quote">
+        <div class="quote-text">I'm not planning to leave right now. But I keep my options open. Just in case.</div>
+      </div>
+      <div class="pattern">
+        <span class="pattern-label">Pattern</span>
+        Passive disengagement. People aren't angry — they're quietly calculating. Exit feels like a rational option, not a last resort.
+      </div>
+    </div>
+  </div>
+
+  <!-- THEME 3 -->
+  <div class="theme t3">
+    <div class="theme-bar"></div>
+    <div class="theme-header">
+      <div class="theme-num">Theme 03</div>
+      <div class="theme-title">I am invisible as a person</div>
+      <div class="theme-desc">People feel reduced to their output. Nobody is tracking them as individuals — their growth, their concerns, their context.</div>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <div class="quote-text">I feel like a brick here. They laid me, mortared me in, and I'm supposed to just lie there. But I don't want to just lie there. I want to live.</div>
+      </div>
+      <div class="quote">
+        <div class="quote-text">I don't know who to go to. I'm not sure anyone is actually tracking my situation.</div>
+      </div>
+      <div class="quote">
+        <div class="quote-text">I don't know where I fit in the new structure. Nobody has explained it to me.</div>
+      </div>
+      <div class="pattern">
+        <span class="pattern-label">Pattern</span>
+        The most painful theme. Not frustration with strategy — a felt absence of human attention. People needed to be seen, not managed.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ARROWS -->
+<div class="arrows">
+  <div class="arrow-item">
+    <div class="arrow-line"></div>
+    <div class="arrow-head"></div>
+  </div>
+  <div class="arrow-item">
+    <div class="arrow-line"></div>
+    <div class="arrow-head"></div>
+  </div>
+  <div class="arrow-item">
+    <div class="arrow-line"></div>
+    <div class="arrow-head"></div>
+  </div>
+</div>
+
+<!-- CENTRAL INSIGHT -->
+<div class="insight">
+  <div class="insight-header">
+    <span class="insight-label">Central insight — where all three themes converge</span>
+  </div>
+  <div class="insight-body">
+    <div class="insight-statement">
+      People didn't need a better strategy. They needed one person whose job was to remember them.
+    </div>
+    <div class="insight-sub">
+      The structural pivot had removed the management umbrella — a single human point of contact who absorbs organisational noise and maintains individual attention. When that layer disappeared, people felt the organisation as abstract, the future as unclear, and themselves as invisible. Compensation was not the issue. Presence was.
+    </div>
+  </div>
+</div>
+
+<!-- PIVOT -->
+<div class="pivot">
+  <div class="pivot-label">What this changed</div>
+  <p>This synthesis reframed the intervention entirely. Leadership had assumed the problem was strategic turbulence and frozen compensation — addressable by waiting for the transition to stabilise. The field data showed a structural gap that waiting would not fix: the management layer had been stretched beyond the point where individual attention was possible. The solution had to be structural too.</p>
+</div>
+
+</body>
+</html>
