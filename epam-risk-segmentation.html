@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>People Risk Segmentation Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f7f4ef;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1714;
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8a8480;
+    margin-bottom: 32px;
+  }
+
+  /* INPUT SIGNALS */
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 12px;
+  }
+
+  .signals {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .signal {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .signal-icon {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .signal-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 4px;
+  }
+
+  .signal-desc {
+    font-size: 11px;
+    color: #4a4540;
+    line-height: 1.4;
+  }
+
+  /* PRIORITY TABLE */
+  .priority-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .priority-table th {
+    background: #f2ede6;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .priority-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    vertical-align: top;
+    font-size: 12px;
+  }
+
+  .priority-table tr:last-child td { border-bottom: none; }
+
+  .p-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .p1 { background: #FCEBEB; color: #A32D2D; }
+  .p2 { background: #FAEEDA; color: #854F0B; }
+  .p3 { background: #FFF3CD; color: #7A5800; }
+  .p4 { background: #E6F1FB; color: #185FA5; }
+  .p5 { background: #EAF3DE; color: #3B6D11; }
+
+  .risk-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .dot-red { background: #E24B4A; }
+  .dot-yellow { background: #EF9F27; }
+  .dot-green { background: #639922; }
+
+  .condition {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cond-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 12px;
+    color: #4a4540;
+  }
+
+  .cond-item .risk-dot { margin-top: 4px; flex-shrink: 0; }
+
+  .rationale {
+    font-size: 11px;
+    color: #8a8480;
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-right: 4px;
+    margin-bottom: 2px;
+  }
+
+  .tag-red { background: #FCEBEB; color: #A32D2D; }
+  .tag-yellow { background: #FAEEDA; color: #854F0B; }
+  .tag-green { background: #EAF3DE; color: #3B6D11; }
+  .tag-gray { background: #f2ede6; color: #4a4540; }
+
+  /* KEY RULE */
+  .key-rule {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-left: 3px solid #7C3AED;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 32px;
+  }
+
+  .key-rule-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7C3AED;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .key-rule p {
+    font-size: 13px;
+    color: #1a1714;
+    line-height: 1.6;
+  }
+
+  /* SORT ORDER */
+  .sort-note {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 14px 18px;
+  }
+
+  .sort-note p {
+    font-size: 12px;
+    color: #4a4540;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>People Risk Segmentation Framework</h1>
+<div class="subtitle">HR Business Partner · EPAM Systems · Reconstructed from field research, 2018</div>
+
+<!-- INPUT SIGNALS -->
+<div class="section-label" style="margin-bottom:12px;">Input signals (sourced from Telescope analytics platform)</div>
+<div class="signals">
+  <div class="signal">
+    <div class="signal-icon">📅</div>
+    <div class="signal-name">Tenure</div>
+    <div class="signal-desc">Time in company. Longer tenure = potentially higher impact of structural disruption.</div>
+  </div>
+  <div class="signal">
+    <div class="signal-icon">🔴</div>
+    <div class="signal-name">Risk status</div>
+    <div class="signal-desc">Red / Yellow / Green flag set by manager or HR at last 1:1. Includes date of last update.</div>
+  </div>
+  <div class="signal">
+    <div class="signal-icon">👤</div>
+    <div class="signal-name">Manager</div>
+    <div class="signal-desc">Which manager owns this person. Flags weaker managers for closer monitoring.</div>
+  </div>
+  <div class="signal">
+    <div class="signal-icon">📊</div>
+    <div class="signal-name">Last assessment</div>
+    <div class="signal-desc">Did the person pass their last level assessment? Was a salary review triggered?</div>
+  </div>
+  <div class="signal">
+    <div class="signal-icon">⚠️</div>
+    <div class="signal-name">Project risk</div>
+    <div class="signal-desc">Risk flag set by delivery manager. Cross-referenced with people risk.</div>
+  </div>
+</div>
+
+<!-- KEY RULE -->
+<div class="key-rule">
+  <div class="key-rule-label">Core design principle</div>
+  <p>Risk status is <strong>not static</strong>. A green flag older than 30 days is treated as yellow — because without recent contact, we have no valid signal. A yellow flag with no recent conversation is treated as red. Recency of information is part of the risk calculation.</p>
+</div>
+
+<!-- PRIORITY TABLE -->
+<div class="section-label">Priority tiers</div>
+<table class="priority-table">
+  <thead>
+    <tr>
+      <th style="width:110px;">Priority</th>
+      <th>Conditions</th>
+      <th>Rationale</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td><span class="p-badge p1">P1 · Critical</span></td>
+      <td>
+        <div class="condition">
+          <div class="cond-item"><span class="risk-dot dot-red"></span><span><span class="tag tag-red">Red risk</span> updated within last 30 days</span></div>
+          <div class="cond-item"><span class="risk-dot dot-red"></span><span>+ assessment not passed or salary review pending</span></div>
+        </div>
+      </td>
+      <td><span class="rationale">Active dissatisfaction signal combined with unresolved career blocker. Highest flight risk.</span></td>
+      <td><span style="font-size:12px; color:#1a1714;">Interview within 48 hours. Flag to unit head.</span></td>
+    </tr>
+
+    <tr>
+      <td><span class="p-badge p2">P2 · High</span></td>
+      <td>
+        <div class="condition">
+          <div class="cond-item"><span class="risk-dot dot-red"></span><span><span class="tag tag-red">Red risk</span> — assessment passed, salary reviewed</span></div>
+        </div>
+      </td>
+      <td><span class="rationale">Risk flag present but career is progressing. May be workload, culture, or manager quality. Needs diagnosis.</span></td>
+      <td><span style="font-size:12px; color:#1a1714;">Interview within 1 week.</span></td>
+    </tr>
+
+    <tr>
+      <td><span class="p-badge p3">P3 · Elevated</span></td>
+      <td>
+        <div class="condition">
+          <div class="cond-item"><span class="risk-dot dot-yellow"></span><span><span class="tag tag-yellow">Yellow risk</span> — any status</span></div>
+          <div class="cond-item"><span class="risk-dot dot-green"></span><span>OR <span class="tag tag-green">Green risk</span> — last contact &gt;30 days ago</span></div>
+        </div>
+      </td>
+      <td><span class="rationale">Green without recent contact = unverified green. Treated as yellow until confirmed. Stale data is a risk in itself.</span></td>
+      <td><span style="font-size:12px; color:#1a1714;">Interview within 2 weeks.</span></td>
+    </tr>
+
+    <tr>
+      <td><span class="p-badge p4">P4 · Monitor</span></td>
+      <td>
+        <div class="condition">
+          <div class="cond-item"><span class="risk-dot dot-yellow"></span><span><span class="tag tag-yellow">Yellow risk</span> — conversation within last 30 days</span></div>
+        </div>
+      </td>
+      <td><span class="rationale">Known concern, recently discussed. Situation is tracked. Lower urgency but still needs follow-through.</span></td>
+      <td><span style="font-size:12px; color:#1a1714;">Follow up in current interview cycle.</span></td>
+    </tr>
+
+    <tr>
+      <td><span class="p-badge p5">P5 · Routine</span></td>
+      <td>
+        <div class="condition">
+          <div class="cond-item"><span class="risk-dot dot-green"></span><span><span class="tag tag-green">Green risk</span> — conversation within last 30 days</span></div>
+        </div>
+      </td>
+      <td><span class="rationale">Fresh signal, no flags. Still interviewed — baseline is needed and everyone deserves contact.</span></td>
+      <td><span style="font-size:12px; color:#1a1714;">Include in scheduled interview cycle.</span></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<!-- SORT NOTE -->
+<div class="sort-note">
+  <div class="section-label" style="margin-bottom:8px;">Secondary sort: by manager</div>
+  <p>Within each priority tier, interviews were additionally sorted by manager — grouping each manager's people together. This ensured that by end of each week, every manager received structured feedback about their own cohort, enabling targeted follow-up conversations between the HR Business Partner and each manager individually.</p>
+</div>
+
+</body>
+</html>

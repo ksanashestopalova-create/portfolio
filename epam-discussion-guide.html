@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Protocol — People Risk Discovery</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f7f4ef;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1714;
+    padding: 40px;
+    line-height: 1.55;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8a8480;
+    margin-bottom: 32px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* PROFILE CARD */
+  .profile-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .profile-field {
+    background: #f7f4ef;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  .field-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  .field-value {
+    font-size: 12px;
+    color: #1a1714;
+  }
+
+  .field-value.placeholder {
+    color: #c0b8ac;
+    font-style: italic;
+  }
+
+  /* PROFILE OBSERVATIONS */
+  .obs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .obs-field {
+    background: #f7f4ef;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+
+  /* MANAGER PRE-BRIEF */
+  .pre-brief {
+    background: #E6F1FB;
+    border: 1px solid rgba(56,138,221,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+  }
+
+  .pre-brief-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #185FA5;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  .pre-brief ul {
+    padding-left: 16px;
+  }
+
+  .pre-brief li {
+    font-size: 12px;
+    color: #1a1714;
+    margin-bottom: 4px;
+  }
+
+  /* AREAS */
+  .area {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .area-header {
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .area-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #f2ede6;
+    color: #8a8480;
+  }
+
+  .area-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1714;
+  }
+
+  .area-intent {
+    font-size: 11px;
+    color: #8a8480;
+    font-style: italic;
+    margin-left: auto;
+  }
+
+  .area-body {
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .question {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .q-text {
+    font-size: 13px;
+    color: #1a1714;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .q-text em {
+    font-style: italic;
+    color: #4a4540;
+  }
+
+  .q-note {
+    font-size: 11px;
+    color: #8a8480;
+    font-style: italic;
+    margin-top: 3px;
+    padding-left: 4px;
+    border-left: 2px solid #e0dbd4;
+  }
+
+  .q-tag {
+    font-size: 9px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .tag-observe { background: #F5F0FA; color: #533489; }
+  .tag-probe { background: #FAEEDA; color: #854F0B; }
+  .tag-provoke { background: #FCEBEB; color: #A32D2D; }
+  .tag-open { background: #EAF3DE; color: #3B6D11; }
+  .tag-profile { background: #E6F1FB; color: #185FA5; }
+
+  /* OBSERVATION NOTE BOX */
+  .obs-note {
+    background: #F5F0FA;
+    border-left: 3px solid #7C3AED;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-top: 6px;
+    font-size: 11px;
+    color: #1a1714;
+  }
+
+  .obs-note strong { color: #533489; }
+
+  /* CLOSE */
+  .close-box {
+    background: #EAF3DE;
+    border: 1px solid rgba(99,153,34,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 8px;
+  }
+
+  .close-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #3B6D11;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  .close-box p { font-size: 12px; color: #1a1714; margin-bottom: 6px; }
+  .close-box p:last-child { margin-bottom: 0; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin: 24px 0;
+  }
+
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #4a4540;
+  }
+</style>
+</head>
+<body>
+
+<h1>Interview Protocol — People Risk Discovery</h1>
+<div class="subtitle">HR Business Partner · EPAM Systems · One-on-one research interviews · 2018</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><span class="q-tag tag-observe">Observe</span> Watch reaction, not just answer</div>
+  <div class="legend-item"><span class="q-tag tag-probe">Probe</span> Dig deeper on signals</div>
+  <div class="legend-item"><span class="q-tag tag-provoke">Provoke</span> Deliberate tension to surface truth</div>
+  <div class="legend-item"><span class="q-tag tag-open">Open</span> Leave space for the unexpected</div>
+  <div class="legend-item"><span class="q-tag tag-profile">Profile</span> Build participant model</div>
+</div>
+
+<!-- PRE-BRIEF -->
+<div class="pre-brief">
+  <div class="pre-brief-label">Before the interview — manager pre-brief</div>
+  <ul>
+    <li>Review participant card: tenure, risk status, assessment history, project feedback, known motivators</li>
+    <li>Note: What does the manager believe this person cares about? (To compare with what the person says)</li>
+    <li>Identify: Any unresolved career moments (blocked assessment, pending salary review, project changes)?</li>
+    <li>Set intent: What is the one thing I most need to understand about this person today?</li>
+  </ul>
+</div>
+
+<!-- PARTICIPANT CARD -->
+<div class="section-label">Participant card (pre-populated from Telescope data)</div>
+<div class="profile-card">
+  <div class="profile-grid">
+    <div class="profile-field">
+      <div class="field-label">Name</div>
+      <div class="field-value placeholder">[from system]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Tenure</div>
+      <div class="field-value placeholder">[years in company]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Resource manager</div>
+      <div class="field-value placeholder">[name + manager strength note]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Last assessment</div>
+      <div class="field-value placeholder">[passed / not passed / pending]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Salary review status</div>
+      <div class="field-value placeholder">[done / overdue / N/A]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Current project + duration</div>
+      <div class="field-value placeholder">[project name · X months]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Risk status</div>
+      <div class="field-value placeholder">[Red / Yellow / Green · date]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Project risk flag</div>
+      <div class="field-value placeholder">[from delivery manager]</div>
+    </div>
+    <div class="profile-field">
+      <div class="field-label">Known motivators (manager view)</div>
+      <div class="field-value placeholder">[what manager believes drives this person]</div>
+    </div>
+  </div>
+
+  <div class="obs-grid">
+    <div class="obs-field">
+      <div class="field-label">Personal context</div>
+      <div class="field-value placeholder">[family situation, relocation, any known life events — from manager]</div>
+    </div>
+    <div class="obs-field">
+      <div class="field-label">Last meaningful conversation</div>
+      <div class="field-value placeholder">[date + topic + who initiated]</div>
+    </div>
+  </div>
+</div>
+
+<!-- AREA 0 -->
+<div class="section-label">Interview areas</div>
+
+<div class="area">
+  <div class="area-header">
+    <span class="area-num">00</span>
+    <span class="area-title">Opening — build participant profile</span>
+    <span class="area-intent">Establish communication style before content</span>
+  </div>
+  <div class="area-body">
+
+    <div class="question">
+      <span class="q-tag tag-profile">Profile</span>
+      <div>
+        <div class="q-text">Brief self-introduction: who I am, why I'm here, how this conversation will be used.</div>
+        <div class="q-note">Not a script — adapted to the person. Aim: make them feel this is for them, not about them.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-profile">Profile</span>
+      <div>
+        <div class="q-text"><em>"How do you prefer to be addressed?"</em> <em>"How do you feel about this kind of conversation — useful, uncomfortable, neutral?"</em></div>
+        <div class="q-note">Sets up communication register for the whole conversation. Documents: open vs. closed communicator.</div>
+      </div>
+    </div>
+
+    <div class="obs-note">
+      <strong>Add to participant card after opening:</strong> preferred name · communication style (open / guarded / performative) · energy level at start of conversation
+    </div>
+
+  </div>
+</div>
+
+<!-- AREA 1 -->
+<div class="area">
+  <div class="area-header">
+    <span class="area-num">01</span>
+    <span class="area-title">Project — current work context</span>
+    <span class="area-intent">Surface project satisfaction and workload pressure</span>
+  </div>
+  <div class="area-body">
+
+    <div class="question">
+      <span class="q-tag tag-observe">Observe</span>
+      <div>
+        <div class="q-text"><em>"Tell me about your current project — what you're working on, your role there."</em></div>
+        <div class="q-note">I already have this data. The question surfaces engagement level: does the person light up, go flat, or deflect? Energy and detail in the answer matter more than the content.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"What's the hardest part of the work right now?"</em></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"How long have you been on this project? Does the timeline feel right for where you are in your career?"</em></div>
+        <div class="q-note">Long stints on one project can signal either stability or stagnation. Listen for which.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AREA 2 -->
+<div class="area">
+  <div class="area-header">
+    <span class="area-num">02</span>
+    <span class="area-title">Manager relationship — presence and support</span>
+    <span class="area-intent">Core research area: is the management umbrella felt?</span>
+  </div>
+  <div class="area-body">
+
+    <div class="question">
+      <span class="q-tag tag-observe">Observe</span>
+      <div>
+        <div class="q-text"><em>"Who is your resource manager right now?"</em></div>
+        <div class="q-note">I know the answer. I'm watching the reaction — body language, tone, speed of response. A name said with a grimace tells more than any follow-up question.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"When did you last speak with them? What was it about?"</em></div>
+        <div class="q-note">I have the logged date. The subjective experience of "how long ago" varies person to person — 3 weeks is nothing to some, abandonment to others. Calibrate per person.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"When something goes wrong on a project — or something feels unclear — who do you go to first?"</em></div>
+        <div class="q-note">If the answer is "no one" or "I figure it out myself" — that's a flag.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-provoke">Provoke</span>
+      <div>
+        <div class="q-text"><em>"We're in the middle of restructuring the unit. If you could switch to a different resource manager, would you? Why or why not?"</em></div>
+        <div class="q-note">Deliberately provocative. Surfaces true feelings about the manager that indirect questions don't reach. Most people won't say "yes" immediately — the hesitation, the hedge, the "well actually..." is the data.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AREA 3 -->
+<div class="area">
+  <div class="area-header">
+    <span class="area-num">03</span>
+    <span class="area-title">Career and development</span>
+    <span class="area-intent">Understand agency and direction</span>
+  </div>
+  <div class="area-body">
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"Do you have a development plan right now? What does it look like?"</em></div>
+        <div class="q-note">A vague answer ("I'm working towards the next level") vs. a specific one ("I have three skills to close, and my manager and I review them quarterly") reveals how actively the person owns their growth.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"Do you have a mentor? How did that come about?"</em></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"How is progress on your assessment going? What's blocking it, if anything?"</em></div>
+        <div class="q-note">For those with a known blocked assessment — approach carefully. The question surfaces whether the person has internalised the block as their failure or the system's.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AREA 4 -->
+<div class="area">
+  <div class="area-header">
+    <span class="area-num">04</span>
+    <span class="area-title">Unit and structural change</span>
+    <span class="area-intent">Surface perception of turbulence and belonging</span>
+  </div>
+  <div class="area-body">
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"How has the last few months felt in terms of the unit — the changes happening, the direction things are going?"</em></div>
+        <div class="q-note">Open enough not to lead. Listen for: clarity vs. confusion, energy vs. fatigue, "we" language vs. "they" language.</div>
+      </div>
+    </div>
+
+    <div class="question">
+      <span class="q-tag tag-probe">Probe</span>
+      <div>
+        <div class="q-text"><em>"Do you feel like you know where you fit in the current structure?"</em></div>
+        <div class="q-note">This was the core finding question. "I'm not sure where I fit" was the dominant signal across the unit.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AREA 5 -->
+<div class="area">
+  <div class="area-header">
+    <span class="area-num">05</span>
+    <span class="area-title">Close — open space</span>
+    <span class="area-intent">Capture what the protocol missed</span>
+  </div>
+  <div class="area-body">
+
+    <div class="question">
+      <span class="q-tag tag-open">Open</span>
+      <div>
+        <div class="q-text"><em>"Is there anything you wanted to say today that we haven't touched on?"</em></div>
+        <div class="q-note">Always last. The things people bring up unprompted are often the most important things.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- CLOSE -->
+<div class="close-box">
+  <div class="close-label">After the interview — update participant card</div>
+  <p>Add: preferred communication frequency · topics they raised unprompted · emotional register throughout · any signals that diverge from manager's pre-brief assessment</p>
+  <p>Flag for unit head if: person expressed strong desire to change manager · mentioned active external job search signals · described feeling invisible or without a clear advocate</p>
+</div>
+
+</body>
+</html>

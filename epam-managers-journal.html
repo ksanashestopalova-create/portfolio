@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manager's Journal — Case Log Template</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f7f4ef;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1714;
+    padding: 40px;
+    line-height: 1.55;
+    max-width: 860px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: #8a8480;
+    margin-bottom: 8px;
+  }
+
+  .concept-note {
+    font-size: 12px;
+    color: #4a4540;
+    font-style: italic;
+    background: #ffffff;
+    border-left: 3px solid #7C3AED;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    margin-bottom: 32px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* ABOUT BOX */
+  .about {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .about-item {}
+
+  .about-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  .about-value {
+    font-size: 12px;
+    color: #1a1714;
+  }
+
+  .about-value.placeholder {
+    color: #c0b8ac;
+    font-style: italic;
+  }
+
+  /* CASE CARD */
+  .case-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .case-header {
+    background: #f2ede6;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  .case-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: #8a8480;
+  }
+
+  .case-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1714;
+  }
+
+  .case-body {
+    padding: 0;
+  }
+
+  .field-row {
+    display: flex;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .field-row:last-child { border-bottom: none; }
+
+  .field-key {
+    width: 200px;
+    flex-shrink: 0;
+    padding: 12px 16px;
+    background: #f9f7f4;
+    font-size: 11px;
+    font-weight: 600;
+    color: #4a4540;
+    font-family: 'IBM Plex Mono', monospace;
+    border-right: 1px solid rgba(0,0,0,0.06);
+    line-height: 1.4;
+  }
+
+  .field-val {
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #1a1714;
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .field-val.placeholder {
+    color: #c0b8ac;
+    font-style: italic;
+  }
+
+  .field-val.example {
+    color: #4a4540;
+    font-style: italic;
+  }
+
+  /* STATUS BADGES */
+  .status-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  .resolved { background: #EAF3DE; color: #3B6D11; }
+  .unresolved { background: #FCEBEB; color: #A32D2D; }
+  .escalated { background: #FAEEDA; color: #854F0B; }
+
+  /* COMPLEXITY */
+  .complexity-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .level {
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+    opacity: 0.4;
+  }
+
+  .level.active { opacity: 1; }
+
+  .lM0 { background: #f2ede6; color: #4a4540; }
+  .lM1 { background: #E6F1FB; color: #185FA5; }
+  .lM2 { background: #FAEEDA; color: #854F0B; }
+  .lM3 { background: #FCEBEB; color: #A32D2D; }
+
+  /* SYSTEM NOTE */
+  .system-note {
+    background: #E6F1FB;
+    border: 1px solid rgba(56,138,221,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+  }
+
+  .system-note-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #185FA5;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  .system-note p {
+    font-size: 12px;
+    color: #1a1714;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+
+  .system-note p:last-child { margin-bottom: 0; }
+
+  /* EXAMPLE */
+  .example-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .example-header {
+    background: #0F6E56;
+    padding: 10px 18px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<h1>Manager's Journal — Case Log</h1>
+<div class="subtitle">Weekly management community · EPAM Systems · Knowledge base · 2018</div>
+<div class="concept-note">
+  A living case law database for the unit's management layer. Each entry documents a real people management situation — how it was handled, what worked, and what a manager in a similar situation should do. Built through weekly community sessions facilitated by the HR Business Partner.
+</div>
+
+<!-- SESSION HEADER -->
+<div class="section-label">Session metadata</div>
+<div class="about">
+  <div class="about-item">
+    <div class="about-label">Session date</div>
+    <div class="about-value placeholder">[date of community session]</div>
+  </div>
+  <div class="about-item">
+    <div class="about-label">Participants</div>
+    <div class="about-value placeholder">[manager names — anonymised in shared version]</div>
+  </div>
+  <div class="about-item">
+    <div class="about-label">Facilitator</div>
+    <div class="about-value">HR Business Partner</div>
+  </div>
+</div>
+
+<!-- CASE TEMPLATE -->
+<div class="section-label">Case entry template</div>
+
+<div class="case-card">
+  <div class="case-header">
+    <span class="case-num">CASE #___</span>
+    <span class="case-title">Case log entry</span>
+  </div>
+  <div class="case-body">
+
+    <div class="field-row">
+      <div class="field-key">Submitted by</div>
+      <div class="field-val placeholder">[manager name · anonymised in shared knowledge base]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Date of situation</div>
+      <div class="field-val placeholder">[approximate — to assess relevance over time]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Case description</div>
+      <div class="field-val placeholder">[What happened. Anonymised — no names, no project identifiers. Enough context to understand the situation.]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">What the manager did</div>
+      <div class="field-val placeholder">[Initial response. What steps were taken before bringing to the community.]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Resolution status</div>
+      <div class="field-val">
+        <div class="status-row">
+          <span class="status-badge resolved">Resolved</span>
+          <span class="status-badge unresolved">Unresolved</span>
+          <span class="status-badge escalated">Escalated</span>
+        </div>
+        <div style="margin-top:8px; font-size:11px; color:#8a8480; font-style:italic;">If unresolved — note what was tried and what is blocking resolution.</div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Community recommendation</div>
+      <div class="field-val placeholder">[Best solution identified through group discussion. Includes alternative approaches considered and rejected.]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Who should be involved in this type of case</div>
+      <div class="field-val placeholder">[e.g. HR BP only · HR BP + unit head · HR BP + legal · manager can handle independently]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Internal references</div>
+      <div class="field-val placeholder">[HR BP completes: relevant policy documents, salary range guidelines, precedents from knowledge base, escalation paths. Links to internal resources.]</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Complexity level</div>
+      <div class="field-val">
+        <div class="complexity-row">
+          <span class="level lM0">M0 — New manager</span>
+          <span class="level lM1">M1 — Junior manager</span>
+          <span class="level lM2">M2 — Senior manager</span>
+          <span class="level lM3">M3 — Unit head</span>
+        </div>
+        <div style="margin-top:8px; font-size:11px; color:#8a8480; font-style:italic;">Used internally by HR BP and unit head. Feeds into Manager School curriculum — cases are sorted by complexity and used as teaching material.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SYSTEM NOTE -->
+<div class="system-note">
+  <div class="system-note-label">How the knowledge base was used</div>
+  <p>Entries were accumulated weekly across the full intervention period. The HR Business Partner maintained two versions: a <strong>full version</strong> (with manager attribution, for HR BP and unit head only) and a <strong>shared version</strong> (anonymised, distributed to all managers in the unit).</p>
+  <p>The complexity classification served a second purpose: cases rated M0–M1 were passed to the Manager School as ready-made teaching material — real situations the unit had actually faced, with documented solutions. This connected the knowledge base directly to the management development pipeline.</p>
+  <p>The journal was designed to be self-sustaining: managers began consulting it independently before bringing new situations to the community, which over time reduced the volume of escalations and built individual judgment capacity.</p>
+</div>
+
+<!-- EXAMPLE ENTRY -->
+<div class="section-label">Example entry (anonymised)</div>
+<div class="example-card">
+  <div class="example-header">Sample case · illustrative only</div>
+  <div class="case-body">
+
+    <div class="field-row">
+      <div class="field-key">Submitted by</div>
+      <div class="field-val example">Manager A · session 4</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Case description</div>
+      <div class="field-val example">Engineer with 4 years tenure, consistently strong delivery, failed assessment for the second time. No clear feedback from assessment committee on what to improve. Engineer is disengaged and has stopped asking about next steps.</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">What the manager did</div>
+      <div class="field-val example">Scheduled a 1:1, tried to reassure. Engineer remained withdrawn. Manager unsure whether to push for re-assessment or wait.</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Resolution status</div>
+      <div class="field-val"><span class="status-badge unresolved">Unresolved at submission</span></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Community recommendation</div>
+      <div class="field-val example">Request written feedback from assessment committee — verbal "didn't pass" is not actionable. Build a concrete 3-month development plan with the engineer, co-authored. Schedule bi-weekly check-ins specifically on assessment progress, not general 1:1s. Re-assessment should be the engineer's decision once they feel ready.</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Who should be involved</div>
+      <div class="field-val example">HR BP · manager · assessment committee contact</div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-key">Complexity level</div>
+      <div class="field-val">
+        <div class="complexity-row">
+          <span class="level lM0">M0</span>
+          <span class="level lM1 active">M1 — Junior manager</span>
+          <span class="level lM2">M2</span>
+          <span class="level lM3">M3</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
