@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time-Motion Study — Observation Log</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f7f4ef;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1714;
+    padding: 40px;
+    line-height: 1.55;
+    max-width: 1100px;
+  }
+
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #8a8480; margin-bottom: 12px; }
+
+  .principle {
+    background: #ffffff;
+    border-left: 3px solid #7C3AED;
+    border-radius: 0 6px 6px 0;
+    padding: 12px 16px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: #1a1714;
+  }
+
+  .principle strong { color: #533489; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* TWO COLUMN DESIGN */
+  .log-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .col-header {
+    padding: 12px 16px;
+    border-radius: 8px 8px 0 0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .col-observe { background: #185FA5; color: #ffffff; }
+  .col-interpret { background: #0F6E56; color: #ffffff; }
+
+  .col-desc {
+    font-size: 11px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.85;
+    margin-top: 3px;
+    font-style: italic;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  /* LOG TABLE */
+  .log-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+
+  .log-table th {
+    padding: 10px 12px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: left;
+    border-bottom: 2px solid rgba(0,0,0,0.08);
+  }
+
+  .log-table td {
+    padding: 10px 12px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    vertical-align: top;
+  }
+
+  .log-table tr:last-child td { border-bottom: none; }
+
+  /* Left column styling */
+  .th-observe { background: #EEF4FB; color: #185FA5; }
+  .td-observe { background: #fafcff; }
+
+  /* Right column styling */
+  .th-interpret { background: #E1F5EE; color: #0F6E56; }
+  .td-interpret { background: #fafff9; }
+
+  /* Column divider */
+  .col-divider {
+    border-left: 2px solid rgba(0,0,0,0.08) !important;
+  }
+
+  /* Tags */
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+  }
+
+  .tag-idle { background: #FAEEDA; color: #854F0B; }
+  .tag-active { background: #EAF3DE; color: #3B6D11; }
+  .tag-safety { background: #FCEBEB; color: #A32D2D; }
+  .tag-quality { background: #E6F1FB; color: #185FA5; }
+  .tag-ok { background: #EAF3DE; color: #3B6D11; }
+  .tag-note { background: #f2ede6; color: #4a4540; }
+
+  .placeholder { color: #c0b8ac; font-style: italic; }
+
+  /* DESIGN NOTES */
+  .design-notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .note-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .note-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 8px;
+  }
+
+  .note-item {
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+    color: #4a4540;
+    margin-bottom: 6px;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+
+  .note-item:last-child { margin-bottom: 0; }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .dot-blue { background: #378ADD; }
+  .dot-green { background: #639922; }
+
+  /* TRIANGULATION NOTE */
+  .triang {
+    background: #F5F0FA;
+    border: 1px solid rgba(83,52,137,0.2);
+    border-left: 3px solid #533489;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+  }
+
+  .triang-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #533489;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 6px;
+  }
+
+  .triang p { font-size: 13px; color: #1a1714; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<h1>Time-Motion Study — Observation Log</h1>
+<div class="subtitle">Workplace Researcher · MacCoffee · Stick-packaging line staffing study · 2014</div>
+
+<div class="principle">
+  <strong>Core design principle:</strong> The log is divided into two distinct halves. The left captures sensory reality — what was seen or heard, without interpretation. The right captures analytical work — meaning derived from observation only after the fact. Mixing the two produces biased data. Keeping them separate produces evidence.
+</div>
+
+<!-- LOG TABLE -->
+<div class="section-label">Observation log template — per operator, per shift</div>
+
+<div class="log-header">
+  <div class="col-header col-observe">
+    Left column — What I observe
+    <div class="col-desc">Sensory reality only. No interpretation. What happened, when, and any raw sensory note.</div>
+  </div>
+  <div class="col-header col-interpret">
+    Right column — What I analyse
+    <div class="col-desc">Analytical work done after observation. Applied only to completed actions, never in real time.</div>
+  </div>
+</div>
+
+<table class="log-table">
+  <thead>
+    <tr>
+      <th class="th-observe" style="width:80px;">Time</th>
+      <th class="th-observe" style="width:220px;">Action observed</th>
+      <th class="th-observe">Raw note</th>
+      <th class="th-interpret col-divider" style="width:110px;">Outcome</th>
+      <th class="th-interpret" style="width:90px;">Safety</th>
+      <th class="th-interpret" style="width:90px;">Quality</th>
+      <th class="th-interpret" style="width:90px;">Difficulty</th>
+      <th class="th-interpret">Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Example row 1 -->
+    <tr>
+      <td class="td-observe">09:04</td>
+      <td class="td-observe">Operator loads coffee portion into hopper</td>
+      <td class="td-observe">Checks fill level twice before closing</td>
+      <td class="td-interpret col-divider"><span class="tag tag-ok">✓ Expected</span></td>
+      <td class="td-interpret"><span class="tag tag-ok">✓ Compliant</span></td>
+      <td class="td-interpret"><span class="tag tag-ok">✓ Standard</span></td>
+      <td class="td-interpret"><span class="tag tag-note">Medium</span></td>
+      <td class="td-interpret">Double-check may indicate low confidence with new equipment</td>
+    </tr>
+    <!-- Example row 2 -->
+    <tr>
+      <td class="td-observe">09:11</td>
+      <td class="td-observe">Machine running. Operator seated, not touching controls.</td>
+      <td class="td-observe">Looking at phone</td>
+      <td class="td-interpret col-divider"><span class="tag tag-idle">Idle — machine cycle</span></td>
+      <td class="td-interpret"><span class="tag tag-ok">✓ No action required</span></td>
+      <td class="td-interpret"><span class="tag tag-ok">✓ Machine running normally</span></td>
+      <td class="td-interpret"><span class="tag tag-note">N/A</span></td>
+      <td class="td-interpret">Natural gap in cycle. Duration to be timed across all operators.</td>
+    </tr>
+    <!-- Example row 3 -->
+    <tr>
+      <td class="td-observe">09:19</td>
+      <td class="td-observe">Seal check on output sticks — manual inspection of 3 units</td>
+      <td class="td-observe">Squinted, discarded 1 unit</td>
+      <td class="td-interpret col-divider"><span class="tag tag-ok">✓ Expected QC step</span></td>
+      <td class="td-interpret"><span class="tag tag-ok">✓ Compliant</span></td>
+      <td class="td-interpret"><span class="tag tag-quality">Flag — 1 defect</span></td>
+      <td class="td-interpret"><span class="tag tag-note">Low</span></td>
+      <td class="td-interpret">Defect rate to track across shifts. Is 1-per-cycle within norm?</td>
+    </tr>
+    <!-- Example row 4 -->
+    <tr>
+      <td class="td-observe">09:24</td>
+      <td class="td-observe">Left workstation. Walked to break area.</td>
+      <td class="td-observe">—</td>
+      <td class="td-interpret col-divider"><span class="tag tag-idle">Idle — break</span></td>
+      <td class="td-interpret"><span class="tag tag-ok">✓ Permitted</span></td>
+      <td class="td-interpret"><span class="tag tag-note">N/A</span></td>
+      <td class="td-interpret"><span class="tag tag-note">N/A</span></td>
+      <td class="td-interpret">Duration logged. Frequency across shift to establish pattern.</td>
+    </tr>
+    <!-- Blank rows -->
+    <tr>
+      <td class="td-observe placeholder">—</td>
+      <td class="td-observe placeholder">[action]</td>
+      <td class="td-observe placeholder">[sensory note]</td>
+      <td class="td-interpret col-divider placeholder">[outcome]</td>
+      <td class="td-interpret placeholder">[safety]</td>
+      <td class="td-interpret placeholder">[quality]</td>
+      <td class="td-interpret placeholder">[difficulty]</td>
+      <td class="td-interpret placeholder">[note]</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- DESIGN NOTES -->
+<div class="section-label">Why each column exists</div>
+<div class="design-notes">
+  <div class="note-card">
+    <div class="note-label">Left column — observation fields</div>
+    <div class="note-item"><div class="dot dot-blue"></div><span><strong>Time</strong> — establishes how much genuine idle time exists in the machine cycle. Unknown at start of study.</span></div>
+    <div class="note-item"><div class="dot dot-blue"></div><span><strong>Action</strong> — documents the full task sequence. Basis for training programme design: what happens, in what order, how.</span></div>
+    <div class="note-item"><div class="dot dot-blue"></div><span><strong>Raw note</strong> — unfiltered sensory observations only. Grimace, hesitation, verbal reaction. Not interpreted here.</span></div>
+  </div>
+  <div class="note-card">
+    <div class="note-label">Right column — analytical fields</div>
+    <div class="note-item"><div class="dot dot-green"></div><span><strong>Outcome</strong> — did the action produce the expected result? Identifies where errors occur and whether they represent normal variation or skill gaps.</span></div>
+    <div class="note-item"><div class="dot dot-green"></div><span><strong>Safety</strong> — did the operator follow safety protocols? Shortcuts here cannot be absorbed into time optimisation — they require additional time allocation.</span></div>
+    <div class="note-item"><div class="dot dot-green"></div><span><strong>Quality</strong> — ISO 9001 and HACCP compliance. Same logic: quality steps are not optional time.</span></div>
+    <div class="note-item"><div class="dot dot-green"></div><span><strong>Difficulty</strong> — could a non-operator perform this action? Calibrates training complexity and onboarding timeline.</span></div>
+  </div>
+</div>
+
+<!-- TRIANGULATION -->
+<div class="triang">
+  <div class="triang-label">Why 4 operators — not 1</div>
+  <p>Conclusions were drawn only after completing the study across 4 different operators across multiple shifts. A single operator's performance — whether exceptional or poor — cannot be generalised. Patterns that appear across all four are systemic. Patterns that appear in one are individual. The staffing recommendation required systemic evidence, not a single data point.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staffing Decision Framework</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #f7f4ef;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: #1a1714;
+    padding: 40px;
+    line-height: 1.55;
+    max-width: 900px;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #8a8480; margin-bottom: 28px; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+
+  /* FINDING */
+  .finding {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+  }
+
+  .finding-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+    margin-bottom: 8px;
+  }
+
+  .finding-stat {
+    font-size: 36px;
+    font-weight: 700;
+    color: #185FA5;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 4px;
+  }
+
+  .finding p {
+    font-size: 13px;
+    color: #4a4540;
+    line-height: 1.6;
+  }
+
+  .finding-note {
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #FAEEDA;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #854F0B;
+  }
+
+  /* RISK TABLE */
+  .risks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .risk {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .risk-left {
+    width: 180px;
+    flex-shrink: 0;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .risk-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .risk-type {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1a1714;
+  }
+
+  .risk-body {
+    flex: 1;
+    padding: 14px 16px;
+    border-left: 1px solid rgba(0,0,0,0.06);
+    font-size: 12px;
+    color: #4a4540;
+    line-height: 1.5;
+  }
+
+  .r1 .risk-left { background: #FCEBEB; }
+  .r1 .risk-num { color: #A32D2D; }
+
+  .r2 .risk-left { background: #FAEEDA; }
+  .r2 .risk-num { color: #854F0B; }
+
+  .r3 .risk-left { background: #FFF8EE; }
+  .r3 .risk-num { color: #7A5800; }
+
+  .r4 .risk-left { background: #f2ede6; }
+  .r4 .risk-num { color: #4a4540; }
+
+  /* CONCLUSION */
+  .conclusion {
+    background: #ffffff;
+    border-left: 3px solid #7C3AED;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: #1a1714;
+    line-height: 1.6;
+  }
+
+  .conclusion-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7C3AED;
+    margin-bottom: 6px;
+  }
+
+  /* PILOT DESIGN */
+  .pilot {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .pilot-header {
+    background: #0F6E56;
+    padding: 12px 18px;
+    color: #ffffff;
+  }
+
+  .pilot-header-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+    margin-bottom: 4px;
+  }
+
+  .pilot-header-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .pilot-hypothesis {
+    padding: 14px 18px;
+    background: #E1F5EE;
+    font-size: 13px;
+    font-style: italic;
+    color: #085041;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .pilot-hypothesis strong {
+    font-style: normal;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    display: block;
+    margin-bottom: 4px;
+    color: #0F6E56;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .pilot-body {
+    padding: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .pilot-section-title {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #8a8480;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 10px;
+    grid-column: span 2;
+  }
+
+  .pilot-card {
+    background: #f9f7f4;
+    border-radius: 6px;
+    padding: 12px 14px;
+  }
+
+  .pilot-card-title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 6px;
+  }
+
+  .pilot-item {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    color: #4a4540;
+    margin-bottom: 4px;
+    align-items: flex-start;
+    line-height: 1.4;
+  }
+
+  .pilot-item:last-child { margin-bottom: 0; }
+
+  .bullet {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #639922;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  /* OBSERVERS */
+  .observers {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .observer {
+    background: #f9f7f4;
+    border-radius: 6px;
+    padding: 10px 12px;
+    text-align: center;
+  }
+
+  .observer-role {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a1714;
+    margin-bottom: 3px;
+  }
+
+  .observer-focus {
+    font-size: 11px;
+    color: #8a8480;
+    font-style: italic;
+  }
+
+  /* RESULT */
+  .result {
+    background: #EAF3DE;
+    border: 1px solid rgba(99,153,34,0.2);
+    border-left: 3px solid #639922;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+  }
+
+  .result-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #3B6D11;
+    margin-bottom: 8px;
+  }
+
+  .result p { font-size: 13px; color: #1a1714; line-height: 1.6; margin-bottom: 6px; }
+  .result p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<h1>Staffing Decision Framework</h1>
+<div class="subtitle">Workplace Researcher · MacCoffee · 1-operator-per-2-machines decision · 2014</div>
+
+<!-- FINDING -->
+<div class="section-label">What the time-motion study showed</div>
+<div class="finding">
+  <div class="finding-label">Aggregate finding across 4 operators · multiple shifts</div>
+  <div class="finding-stat">&gt; 30%</div>
+  <p>Idle time in the 1-operator-per-machine model — consistent across all operators, with no critical safety or quality violations during active periods.</p>
+  <div class="finding-note">This told us one thing: there is unoccupied time. It did not tell us whether that time could safely absorb a second machine. That required a separate study.</div>
+</div>
+
+<!-- RISKS -->
+<div class="section-label">Why the data alone was not enough — risk analysis</div>
+<div class="risks">
+
+  <div class="risk r1">
+    <div class="risk-left">
+      <div class="risk-num">Risk 01</div>
+      <div class="risk-type">Quality failure</div>
+    </div>
+    <div class="risk-body">
+      Operator may not keep pace with two machines simultaneously, leading to unmonitored output and increased defect rates. Idle time in a single-machine model does not guarantee capacity for a dual-machine model.
+    </div>
+  </div>
+
+  <div class="risk r2">
+    <div class="risk-left">
+      <div class="risk-num">Risk 02</div>
+      <div class="risk-type">Safety breach</div>
+    </div>
+    <div class="risk-body">
+      Under time pressure, operators may shortcut safety protocols. In a food production environment with HACCP certification, this creates compliance exposure and potential harm to the worker.
+    </div>
+  </div>
+
+  <div class="risk r3">
+    <div class="risk-left">
+      <div class="risk-num">Risk 03</div>
+      <div class="risk-type">Physical load</div>
+    </div>
+    <div class="risk-body">
+      No data existed on whether dual-machine operation was physically sustainable across a full shift. Ergonomic load, concentration demand, and fatigue accumulation were all unknown variables.
+    </div>
+  </div>
+
+  <div class="risk r4">
+    <div class="risk-left">
+      <div class="risk-num">Risk 04</div>
+      <div class="risk-type">Unknown unknowns</div>
+    </div>
+    <div class="risk-body">
+      New equipment in a new configuration may produce edge cases not covered by existing instructions or anticipated in planning. These could affect any of the above.
+    </div>
+  </div>
+
+</div>
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div class="conclusion-label">Conclusion from risk analysis</div>
+  The only responsible path to a staffing recommendation was a controlled pilot study. Observation data created a hypothesis. The pilot would test it — under real conditions, with safeguards in place, and with no production consequences if the hypothesis was wrong.
+</div>
+
+<!-- PILOT DESIGN -->
+<div class="section-label">Controlled pilot study design</div>
+<div class="pilot">
+
+  <div class="pilot-header">
+    <div class="pilot-header-label">Hypothesis</div>
+    <div class="pilot-header-title">One operator can run two adjacent stick-packaging machines without safety or quality compromise</div>
+  </div>
+
+  <div class="pilot-hypothesis">
+    <strong>Test conditions</strong>
+    Machines placed in mirrored configuration, side by side. Study conducted using written-off raw materials — rejected coffee stock and defective packaging film — so no production losses occur if the hypothesis fails.
+  </div>
+
+  <div class="pilot-body">
+
+    <div class="pilot-section-title">Study design</div>
+
+    <div class="pilot-card">
+      <div class="pilot-card-title">Participant conditions</div>
+      <div class="pilot-item"><div class="bullet"></div><span>Full shift paid at standard rate — no financial pressure</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Framed as "equipment testing cycle" — not performance evaluation</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Operator briefed that defects are expected and acceptable</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Shift supervisor checks in every hour — neutral conversation, 5 minutes</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Medical check by facility doctor at end of each shift</span></div>
+    </div>
+
+    <div class="pilot-card">
+      <div class="pilot-card-title">Study parameters</div>
+      <div class="pilot-item"><div class="bullet"></div><span>n = 4 operators · 1 pilot shift each</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Minute-by-minute observation log (same template as time-motion study)</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Speed calibrated per operator — no fixed target imposed</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Defect rate tracked against acceptable norm</span></div>
+      <div class="pilot-item"><div class="bullet"></div><span>Conclusions drawn only after all 4 operators complete study</span></div>
+    </div>
+
+    <div class="observers">
+      <div class="observer">
+        <div class="observer-role">Researcher (me)</div>
+        <div class="observer-focus">Action log · timing · operator behaviour</div>
+      </div>
+      <div class="observer">
+        <div class="observer-role">Quality engineer</div>
+        <div class="observer-focus">Product output · defect rate · ISO 9001 compliance</div>
+      </div>
+      <div class="observer">
+        <div class="observer-role">Safety engineer</div>
+        <div class="observer-focus">Protocol adherence · HACCP critical control points · ergonomics</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="result">
+  <div class="result-label">Outcome</div>
+  <p>All four operators completed dual-machine operation within acceptable quality and safety parameters. Defect rates elevated in the first two shifts — consistent with new workflow learning — and returned to baseline by shift three and four.</p>
+  <p>The hypothesis was validated. The 1-operator-per-2-machines model was approved for production implementation, with a mandatory supervised onboarding period for all new operators on this line.</p>
+</div>
+
+</body>
+</html>
